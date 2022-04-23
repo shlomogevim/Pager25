@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityUserProfileBinding
 import com.sg.pager25.firestore.FirestoreClass
+import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants
 import com.sg.pager25.utilities.Constants.COMPLETE_PROFILE

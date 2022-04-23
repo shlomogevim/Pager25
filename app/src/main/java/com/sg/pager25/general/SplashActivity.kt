@@ -1,4 +1,4 @@
-package com.sg.pager25
+package com.sg.pager25.general
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.os.Handler
 import androidx.core.content.res.ResourcesCompat
 import com.sg.pager25.databinding.ActivitySplashBinding
 import com.sg.pager25.firestore.FirestoreClass
-import com.sg.pager25.login.activities.BaseActivity
 import com.sg.pager25.login.activities.LoginActivity
 import com.sg.pager25.post_activities.PostMainActivity
 import com.sg.pager25.utilities.FontFamilies

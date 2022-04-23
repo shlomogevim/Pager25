@@ -3,6 +3,7 @@ package com.sg.pager25.login.activities
 import android.content.Intent
 import android.os.Bundle
 import com.sg.pager25.databinding.ActivityDashboardBinding
+import com.sg.pager25.general.BaseActivity
 
 class DashboardActivity : BaseActivity() {
     lateinit var binding: ActivityDashboardBinding

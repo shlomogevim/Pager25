@@ -8,7 +8,7 @@
 
     android:background="@color/material_dynamic_primary80"
     android:keepScreenOn="true"
-    tools:context=".SplashActivity">
+    tools:context=".general.SplashActivity">
 
     <ImageView
         android:id="@+id/imageView"

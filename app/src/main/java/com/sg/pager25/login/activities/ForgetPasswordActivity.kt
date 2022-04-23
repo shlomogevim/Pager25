@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityForgetPasswordBinding
+import com.sg.pager25.general.BaseActivity
 
 class ForgetPasswordActivity : BaseActivity() {
    lateinit var binding: ActivityForgetPasswordBinding

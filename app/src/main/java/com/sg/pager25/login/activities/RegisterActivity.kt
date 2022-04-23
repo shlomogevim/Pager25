@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityRegisterBinding
 import com.sg.pager25.firestore.FirestoreClass
+import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
 
 class RegisterActivity : BaseActivity() {

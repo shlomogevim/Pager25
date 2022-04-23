@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityLoginBinding
 import com.sg.pager25.firestore.FirestoreClass
+import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants.EXTRA_USER_DETAILS
 
