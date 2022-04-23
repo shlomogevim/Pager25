@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sg.pager25">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -11,25 +12,46 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pager25">
         <activity
-            android:name=".activities.ForgetPasswordActivity"
+            android:name=".post_activities.SignInPostActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SettingActivity"
+            android:name=".post_activities.AccountPostSettingActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name=".post_activities.PostRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.UserProfileActivity"
+            android:name=".post_activities.UpdateCommentActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".post_activities.PostDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".utilities.DialogActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".post_activities.PostMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.ForgetPasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.SettingActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.DashboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.UserProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.activities.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,8 +60,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainActivity"
-            android:exported="true"></activity>
+            android:name=".login.activities.MainActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

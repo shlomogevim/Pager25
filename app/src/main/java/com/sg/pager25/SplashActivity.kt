@@ -1,16 +1,15 @@
-package com.sg.pager25.activities
+package com.sg.pager25
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
-import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivitySplashBinding
 import com.sg.pager25.firestore.FirestoreClass
-import com.sg.pager25.utilities.MyFontFamilies
-import com.sg.pager25.utilities.Utility
+import com.sg.pager25.login.activities.BaseActivity
+import com.sg.pager25.login.activities.LoginActivity
+import com.sg.pager25.post_activities.PostMainActivity
+import com.sg.pager25.utilities.FontFamilies
 
 class SplashActivity : BaseActivity() {
 
@@ -29,7 +28,7 @@ class SplashActivity : BaseActivity() {
     }
 
     private fun setText() {
-        val font= MyFontFamilies()
+        val font= FontFamilies()
         val fontAddress = font.getFamilyFont(103)
         binding.tvAppName.typeface = ResourcesCompat.getFont(this, fontAddress)
 
@@ -42,12 +41,12 @@ class SplashActivity : BaseActivity() {
                 val currentUserID = FirestoreClass().getCurrentUserID()
          logi("splash 43       currentUserID=$currentUserID")
                 if (currentUserID.isNotEmpty()) {
-                  startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                //  startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
 
 
-                 //   startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                  startActivity(Intent(this@SplashActivity, PostMainActivity::class.java))
                 } else{
-                    startActivity(Intent(this,LoginActivity::class.java))
+                    startActivity(Intent(this, LoginActivity::class.java))
                    //util.logi("SlashActivity 50 currentUserID=$currentUserID")
                 }
                 finish()

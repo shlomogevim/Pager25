@@ -22,4 +22,11 @@
     <color name="colorLightGrey">#F1F1F1</color>
     <color name="colorBorder">#E8E6E6</color>
     <color name="colorDarkGrey">#878787</color>
+
+    <color name="broun10">#F5D042</color>
+    <color name="broun2">#FFDFDE</color>
+    <color name="blue1">#00539C</color>
+    <color name="broun1">#6d4c41</color>
+    <color name="orenge1">#f4511e</color>
+    <color name="light_green">#6fc27c</color>
 </resources>

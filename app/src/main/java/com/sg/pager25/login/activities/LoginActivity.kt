@@ -1,7 +1,6 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
@@ -11,7 +10,6 @@ import com.sg.pager25.databinding.ActivityLoginBinding
 import com.sg.pager25.firestore.FirestoreClass
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants.EXTRA_USER_DETAILS
-import com.sg.pager25.utilities.Utility
 
 class LoginActivity : BaseActivity(),View.OnClickListener {
     lateinit var binding: ActivityLoginBinding

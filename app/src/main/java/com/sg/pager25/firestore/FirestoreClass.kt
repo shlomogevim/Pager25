@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
-import com.sg.pager25.activities.*
+import com.sg.pager25.login.activities.*
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants.LOGGED_IN_USERNAME
 import com.sg.pager25.utilities.Constants.MYSHOPPAL_PREFERENCES

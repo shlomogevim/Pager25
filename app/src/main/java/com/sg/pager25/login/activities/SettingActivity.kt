@@ -1,7 +1,6 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth

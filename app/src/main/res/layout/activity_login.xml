@@ -8,7 +8,7 @@
 
     android:keepScreenOn="true"
 
-    tools:context="activities.LoginActivity">
+    tools:context=".login.activities.LoginActivity">
 
     <FrameLayout
         android:id="@+id/fl_header_image"

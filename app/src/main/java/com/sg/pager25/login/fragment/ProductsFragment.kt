@@ -1,4 +1,4 @@
-package com.sg.pager25.fragment
+package com.sg.pager25.login.fragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.sg.pager25.R
-import com.sg.pager25.activities.SettingActivity
+import com.sg.pager25.login.activities.SettingActivity
 
 
 class ProductsFragment : Fragment() {

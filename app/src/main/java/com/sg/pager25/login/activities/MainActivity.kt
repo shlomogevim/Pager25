@@ -1,9 +1,8 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityMainBinding
 import com.sg.pager25.utilities.Constants.LOGGED_IN_USERNAME
 import com.sg.pager25.utilities.Constants.MYSHOPPAL_PREFERENCES

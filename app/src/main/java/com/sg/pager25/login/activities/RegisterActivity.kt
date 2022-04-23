@@ -1,6 +1,5 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast

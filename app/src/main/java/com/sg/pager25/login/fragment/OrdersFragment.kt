@@ -1,4 +1,4 @@
-package com.sg.pager25.fragment
+package com.sg.pager25.login.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

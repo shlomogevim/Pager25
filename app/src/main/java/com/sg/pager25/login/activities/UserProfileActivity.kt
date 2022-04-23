@@ -1,11 +1,10 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -23,7 +22,6 @@ import com.sg.pager25.utilities.Constants.FEMALE
 import com.sg.pager25.utilities.Constants.FIRST_NAME
 import com.sg.pager25.utilities.Constants.GENDER
 import com.sg.pager25.utilities.Constants.IMAGE
-import com.sg.pager25.utilities.Constants.LAST_NAME
 import com.sg.pager25.utilities.Constants.MALE
 import com.sg.pager25.utilities.Constants.MOBILE
 import com.sg.pager25.utilities.Constants.READ_STORAGE_PERMISSION_CODE

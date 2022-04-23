@@ -3,7 +3,7 @@ package com.sg.pager25.utilities
 import com.sg.pager25.R
 
 
-class MyFontFamilies {
+class FontFamilies {
 
         fun getTransfo(index:Int)=
             when (index){

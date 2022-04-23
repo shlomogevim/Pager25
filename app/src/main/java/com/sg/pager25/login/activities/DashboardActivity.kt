@@ -1,15 +1,8 @@
-package com.sg.pager25.activities
+package com.sg.pager25.login.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityDashboardBinding
-import com.sg.pager25.fragment.DashboardFragment
-import com.sg.pager25.fragment.OrdersFragment
-import com.sg.pager25.fragment.ProductsFragment
 
 class DashboardActivity : BaseActivity() {
     lateinit var binding: ActivityDashboardBinding
