@@ -8,7 +8,7 @@
 
     android:keepScreenOn="true"
 
-    tools:context=".login.activities.DashboardActivity">
+    tools:context=".login.activities_appshop.DashboardActivity">
 
     <Button
         android:id="@+id/settingBtn"

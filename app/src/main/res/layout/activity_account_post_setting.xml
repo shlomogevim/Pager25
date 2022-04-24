@@ -8,7 +8,7 @@
 
     android:keepScreenOn="true"
 
-    tools:context="post_activities.AccountPostSettingActivity">
+    tools:context="activities_social.AccountPostSettingActivity">
 
     <RelativeLayout
         android:id="@+id/relativ1"

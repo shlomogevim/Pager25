@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:keepScreenOn="true"
-    tools:context=".login.activities.UserProfileActivity">
+    tools:context=".login.activities_appshop.UserProfileActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_user_profile_activity"

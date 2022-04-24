@@ -8,7 +8,10 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    tools:context=".login.activities.SettingActivity">
+
+    android:keepScreenOn="true"
+
+    tools:context=".login.activities_appshop.SettingActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"

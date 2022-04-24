@@ -1,4 +1,4 @@
-package com.sg.pager25.login.activities
+package com.sg.pager25.login.activities_appshop
 
 import android.content.Intent
 import android.os.Bundle
@@ -108,7 +108,8 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
             startActivity(intent)
            // startActivity(Intent(this@LoginActivity, UserProfileActivity::class.java))
         }else{
-            val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+          //  val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
+            val intent = Intent(this@LoginActivity,MainActivityAppShop::class.java)
             intent.putExtra(EXTRA_USER_DETAILS, user)
             startActivity(intent)
         }

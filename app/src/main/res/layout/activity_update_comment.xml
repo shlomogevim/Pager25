@@ -9,7 +9,7 @@
 
     android:keepScreenOn="true"
 
-    tools:context="post_activities.UpdateCommentActivity">
+    tools:context="activities_social.UpdateCommentActivity">
 
     <EditText
         android:id="@+id/updateCommentTxt"

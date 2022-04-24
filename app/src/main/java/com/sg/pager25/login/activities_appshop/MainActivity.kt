@@ -1,4 +1,4 @@
-package com.sg.pager25.login.activities
+package com.sg.pager25.login.activities_appshop
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

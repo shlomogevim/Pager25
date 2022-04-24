@@ -1,4 +1,4 @@
-package com.sg.pager25.post_activities
+package com.sg.pager25.activities_social
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity

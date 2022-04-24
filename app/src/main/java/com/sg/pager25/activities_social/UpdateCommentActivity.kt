@@ -1,11 +1,10 @@
-package com.sg.pager25.post_activities
+package com.sg.pager25.activities_social
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityUpdateCommentBinding
 import com.sg.pager25.utilities.Constants.COMMENT_ID
 import com.sg.pager25.utilities.Constants.COMMENT_LIST

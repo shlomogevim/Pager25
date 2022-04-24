@@ -2,7 +2,6 @@ package com.sg.pager25.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,10 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.sg.pager20.adapters.DrawPostCenter
 import com.sg.pager25.R
-import com.sg.pager25.login.activities.UserProfileActivity
 import com.sg.pager25.models.Post
-import com.sg.pager25.post_activities.PostDetailsActivity
-import com.sg.pager25.utilities.Constants
+import com.sg.pager25.activities_social.PostDetailsActivity
 import com.sg.pager25.utilities.Constants.POST_EXSTRA
 import com.sg.pager25.utilities.UtilityPost
 import kotlin.collections.ArrayList

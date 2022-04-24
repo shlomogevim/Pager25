@@ -1,14 +1,11 @@
-package com.sg.pager25.post_activities
+package com.sg.pager25.activities_social
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sg.pager25.adapters.PostAdapter
 import com.sg.pager25.animation.BookFlipPageTransformer2
@@ -16,10 +13,7 @@ import com.sg.pager25.animation.CardFlipPageTransformer2
 import com.sg.pager25.databinding.ActivityPostMainBinding
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.Post
-import com.sg.pager25.utilities.Constants.CURRENT_USER_EXIST
-import com.sg.pager25.utilities.Constants.NOT_EXIST
 import com.sg.pager25.utilities.Constants.POST_REF
-import com.sg.pager25.utilities.Constants.SHAR_PREF
 import com.sg.pager25.utilities.UtilityPost
 import java.util.ArrayList
 

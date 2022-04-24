@@ -1,4 +1,4 @@
-package com.sg.pager25.login.activities
+package com.sg.pager25.login.activities_appshop
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,16 +9,20 @@ import com.sg.pager25.databinding.ActivitySettingBinding
 import com.sg.pager25.firestore.FirestoreClass
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
+import com.sg.pager25.utilities.Constants
 import com.sg.pager25.utilities.Constants.EXTRA_USER_DETAILS
 import com.sg.pager25.utilities.GlideLoader
 
 class SettingActivity : BaseActivity(),View.OnClickListener {
     lateinit var binding: ActivitySettingBinding
-    private lateinit var mUserDetails: User
+    private lateinit var currentUser: User
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        currentUser = intent.getParcelableExtra(Constants.USER_EXTRA)!!
+        logi("SettingActivity   25 =======>  /n $currentUser  ")
 
         binding.tvEdit.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
@@ -34,7 +38,7 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
             when (v.id) {
                 R.id.tv_edit -> {
                     val intent = Intent(this, UserProfileActivity::class.java)
-                    intent.putExtra(EXTRA_USER_DETAILS, mUserDetails)
+                    intent.putExtra(EXTRA_USER_DETAILS, currentUser)
                     startActivity(intent)
                 }
                 R.id.btn_logout -> {
@@ -63,7 +67,7 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
      */
     fun userDetailsSuccess(user: User) {
 
-        mUserDetails = user
+        currentUser = user
         hideProgressDialog()
 
         logi("setting 69 user=$user")

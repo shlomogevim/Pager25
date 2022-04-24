@@ -6,8 +6,9 @@ import android.os.Handler
 import androidx.core.content.res.ResourcesCompat
 import com.sg.pager25.databinding.ActivitySplashBinding
 import com.sg.pager25.firestore.FirestoreClass
-import com.sg.pager25.login.activities.LoginActivity
-import com.sg.pager25.post_activities.PostMainActivity
+import com.sg.pager25.login.activities_appshop.DashboardActivity
+import com.sg.pager25.login.activities_appshop.LoginActivity
+import com.sg.pager25.login.activities_appshop.MainActivityAppShop
 import com.sg.pager25.utilities.FontFamilies
 
 class SplashActivity : BaseActivity() {
@@ -38,15 +39,16 @@ class SplashActivity : BaseActivity() {
         Handler().postDelayed(
             {
                 val currentUserID = FirestoreClass().getCurrentUserID()
+             logi("splash 42       currentUserID not empty===>currentUserI" +
+                     "D=$currentUserID  ")
+
                 if (currentUserID.isNotEmpty()) {
 //                    logi("splash 44       currentUserID not empty===>currentUserID=$currentUserID  ")
-                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
-                    //  startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+              //      startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, MainActivityAppShop::class.java))
                 } else{
                     logi("splash 50       currentUserID is  empty====>    currentUserID=$currentUserID")
                     startActivity(Intent(this, LoginActivity::class.java))
-
-
                 }
                 finish()
             },2

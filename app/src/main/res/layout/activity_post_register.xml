@@ -9,7 +9,7 @@
 
     android:keepScreenOn="true"
 
-    tools:context="post_activities.PostRegisterActivity">
+    tools:context="activities_social.PostRegisterActivity">
 
     <TextView
         android:id="@+id/mainTitle"

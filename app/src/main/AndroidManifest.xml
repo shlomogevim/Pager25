@@ -13,43 +13,46 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.Pager25">
         <activity
-            android:name=".post_activities.SignInPostActivity"
+            android:name=".login.activities_appshop.MainActivityAppShop"
             android:exported="false" />
         <activity
-            android:name=".post_activities.AccountPostSettingActivity"
+            android:name=".activities_social.SignInPostActivity"
             android:exported="false" />
         <activity
-            android:name=".post_activities.PostRegisterActivity"
+            android:name=".activities_social.AccountPostSettingActivity"
             android:exported="false" />
         <activity
-            android:name=".post_activities.UpdateCommentActivity"
+            android:name=".activities_social.PostRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".post_activities.PostDetailsActivity"
+            android:name=".activities_social.UpdateCommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities_social.PostDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".utilities.DialogActivity"
             android:exported="false" />
         <activity
-            android:name=".post_activities.PostMainActivity"
+            android:name=".activities_social.PostMainActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.ForgetPasswordActivity"
+            android:name=".login.activities_appshop.ForgetPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.SettingActivity"
+            android:name=".login.activities_appshop.SettingActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.DashboardActivity"
+            android:name=".login.activities_appshop.DashboardActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.UserProfileActivity"
+            android:name=".login.activities_appshop.UserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.LoginActivity"
+            android:name=".login.activities_appshop.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".login.activities.RegisterActivity"
+            android:name=".login.activities_appshop.RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".general.SplashActivity"
@@ -61,12 +64,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.activities.MainActivity"
+            android:name=".login.activities_appshop.MainActivity"
             android:exported="true" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat" />`
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
-
 
 </manifest>
