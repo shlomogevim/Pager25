@@ -8,6 +8,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.TextUtils
 import android.widget.Toast
 import com.google.android.gms.tasks.Continuation
@@ -22,7 +23,13 @@ import com.google.firebase.storage.StorageTask
 import com.google.firebase.storage.UploadTask
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityAccountPostSettingBinding
+import com.sg.pager25.firestore.FirestoreClass
+import com.sg.pager25.general.BaseActivity
+import com.sg.pager25.login.activities.LoginActivity
+import com.sg.pager25.models.User
+import com.sg.pager25.utilities.Constants.POST_EXSTRA
 import com.sg.pager25.utilities.Constants.USER_BIO
+import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.Constants.USER_FULLNAME
 import com.sg.pager25.utilities.Constants.USER_IMAGE
 import com.sg.pager25.utilities.Constants.USER_REF
@@ -30,27 +37,32 @@ import com.sg.pager25.utilities.Constants.USER_USERNAME
 import com.sg.pager25.utilities.UtilityPost
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
+import java.util.*
+import kotlin.collections.HashMap
 
-class AccountPostSettingActivity : AppCompatActivity() {
+class AccountPostSettingActivity : BaseActivity() {
     lateinit var binding:ActivityAccountPostSettingBinding
     var checker = ""
     var imageUri: Uri? = null
     var myUrl = ""
+    var currentUser :User?=null
 
     private var storageProfilePicRef: StorageReference? = null
-    private var currentUser: FirebaseUser?=null
+
     private lateinit var progressDialog: ProgressDialog
     private val util = UtilityPost()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityAccountPostSettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        currentUser = FirebaseAuth.getInstance().currentUser
-        util.logi("AcountSettingActivity 115     currentUser=$currentUser")
+
+        currentUser = intent.getParcelableExtra(USER_EXTRA)
+        logi("AccountPostSetting  61 =======>  /n $currentUser  ")
+
         if (currentUser==null){
             createDialoge()
         }else {
-
+            userInfo()
             storageProfilePicRef = FirebaseStorage.getInstance().reference.child("Profile Picture")
             progressDialog = ProgressDialog(this)
 
@@ -60,6 +72,14 @@ class AccountPostSettingActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)
                 finish()
+            }
+
+
+            binding.profileImage.setOnClickListener {
+                checker = "clicked"
+                CropImage.activity()
+                    .setAspectRatio(1,1)
+                    .start(this)
             }
 
             binding.changeImageTextBtn.setOnClickListener {
@@ -75,9 +95,11 @@ class AccountPostSettingActivity : AppCompatActivity() {
                     uploadUserInfoOnly()
                 }
             }
-            userInfo()
+
         }
     }
+
+
 
     private fun createDialoge() {
         val alertDialog: AlertDialog = AlertDialog.Builder(this,R.style.RoundedCornerDialog).create()
@@ -108,7 +130,8 @@ class AccountPostSettingActivity : AppCompatActivity() {
     }
 
     private fun uploadUserInfoOnly() {
-        val currentUid = FirebaseAuth.getInstance().currentUser?.uid
+
+
         when {
             TextUtils.isEmpty(binding.fullNameProfileFragment.text.toString()) ->
                 sendToast("Please write full name.")
@@ -119,19 +142,26 @@ class AccountPostSettingActivity : AppCompatActivity() {
             else -> {
 
                 val data = HashMap<String, Any>()
-                data[USER_FULLNAME] = binding.fullNameProfileFragment.text.toString().toLowerCase()
-                data[USER_USERNAME] = binding.usernameProfileFrag.text.toString().toLowerCase()
-                data[USER_BIO] = binding.bioProfileFragment.text.toString().toLowerCase()
+                data[USER_FULLNAME] = binding.fullNameProfileFragment.text.toString()
+                    .lowercase(Locale.getDefault())
+                data[USER_USERNAME] = binding.usernameProfileFrag.text.toString()
+                    .lowercase(Locale.getDefault())
+                data[USER_BIO] = binding.bioProfileFragment.text.toString()
+                    .lowercase(Locale.getDefault())
 
-                if (currentUid != null) {
-                    FirebaseFirestore.getInstance().collection(USER_REF).document(currentUid)
+                FirestoreClass().updateUserProfileData(this, data)
+                sendToast("Account information has been update successfully ...")
+                finish()
+
+              /*  if (currentUser?.uid != null) {
+                    FirebaseFirestore.getInstance().collection(USER_REF).document(currentUser!!.uid)
                         .update(data)
                         .addOnSuccessListener {
                             sendToast("Account information has been update successfully ...")
                             // startActivity(Intent(this, MainActivity::class.java))
                             finish()
                         }
-                }
+                }*/
             }
         }
     }
@@ -198,19 +228,13 @@ class AccountPostSettingActivity : AppCompatActivity() {
         }
     }
     private fun userInfo() {
-        val currentUid = FirebaseAuth.getInstance().currentUser?.uid
-        if (currentUid != null) {
-            FirebaseFirestore.getInstance().collection(USER_REF).document(currentUid).get()
-                .addOnSuccessListener {
-                    val user = util.convertToUser(it)
-                    Picasso.get().load(user.image).placeholder(R.drawable.profile)
+                    Picasso.get().load(currentUser?.image).placeholder(R.drawable.profile)
                         .into(binding.profileImage)
-                    binding.fullNameProfileFragment.setText(user.lastName)
-                    binding.usernameProfileFrag.setText(user.firstName)
-                    binding.bioProfileFragment.setText(user.dio)
-                }.addOnFailureListener {
-                    //Log.d("fff", "Fail ->${it.localizedMessage}")
-                }
-        }
+                    binding.fullNameProfileFragment.setText(currentUser?.lastName)
+                    binding.usernameProfileFrag.setText(currentUser?.firstName)
+                    binding.bioProfileFragment.setText(currentUser?.dio)
+
     }
+
+
 }

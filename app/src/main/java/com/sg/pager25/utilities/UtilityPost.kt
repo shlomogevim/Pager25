@@ -250,7 +250,7 @@ class UtilityPost {
            alertDialog.show()
        }*/
     fun convertToUser(snap: DocumentSnapshot?): User {
-        var userName = "no userNameString"
+        var userName =""
         var fullName = "no fullName"
         var email: String = "no email"
         var profileImage =
@@ -264,9 +264,18 @@ class UtilityPost {
         dio = snap?.getString(USER_BIO).toString()
         uid = snap?.getString(FIRESTORE_USER_ID).toString()
 
-        val newUser = User(userName, fullName, email, profileImage, dio, uid.toLong())
+        val newUser = User(uid=uid, firstName = userName, lastName = fullName, email, image = profileImage, dio=dio)
         return newUser
     }
+    /* val uid: String = "",
+    val firstName: String = "",
+    val lastName: String = "",
+    val email: String = "",
+    val image: String = "",
+    val mobile: Long = 0,
+    val gender: String = "",
+    var dio: String = "",
+    val profileCompleted: Int = 0*/
 
 
     fun downloadPost1(context: Context, index: Int) {
@@ -330,7 +339,7 @@ class UtilityPost {
 
     fun retrieveUserFromFirestore(snap: DocumentSnapshot?): User {
 
-        val id = snap?.get(USER_ID).toString()
+        val uid = snap?.get(USER_ID).toString()
         val fullName = snap?.get(USER_FULLNAME).toString()
         val name = snap?.get(USER_USERNAME).toString()
         val email = snap?.get(USER_EMAIL).toString()
@@ -338,7 +347,7 @@ class UtilityPost {
         val dio = snap?.get(USER_BIO).toString()
         val timestamp = snap?.getTimestamp(USER_TIME)
 
-        val newUser = User(name,fullName,email,"",dio,id.toLong())
+        val newUser = User(uid,name,fullName,email,"",dio=dio)
         return newUser
     }
 

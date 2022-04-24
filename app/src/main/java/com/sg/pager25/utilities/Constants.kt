@@ -57,7 +57,9 @@ object Constants {
 
     const val SHARPREF_REF = "POST_PREF"
 
-    const val DETAIL_POST_EXSTRA = "detail_post_exstra"
+
+    const val POST_EXSTRA="post_exstra"
+    const val USER_EXTRA="user_exstra_two"
 
     const val USER_REF = "users"
     const val FIRESTORE_USER_ID = "user uid"

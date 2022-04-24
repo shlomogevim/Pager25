@@ -25,7 +25,8 @@ import java.util.ArrayList
 
 class PostMainActivity : BaseActivity() {
     lateinit var binding: ActivityPostMainBinding
-    val util = UtilityPost()
+
+  val util = UtilityPost()
     val posts = ArrayList<Post>()
     lateinit var postAdapter: PostAdapter
 
@@ -34,9 +35,9 @@ class PostMainActivity : BaseActivity() {
         binding= ActivityPostMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val pref = getSharedPreferences(SHAR_PREF, Context.MODE_PRIVATE).edit()
+      /*  val pref = getSharedPreferences(SHAR_PREF, Context.MODE_PRIVATE).edit()
         pref.putString(CURRENT_USER_EXIST, NOT_EXIST)
-        pref.apply()
+        pref.apply()*/
 
 
         val posts = downloadAllPost()
@@ -44,8 +45,6 @@ class PostMainActivity : BaseActivity() {
         postAdapter = PostAdapter(pager, this, posts)
         pager.adapter = postAdapter
         addAnimation(pager)
-
-
     }
 
     fun downloadAllPost(): ArrayList<Post> {

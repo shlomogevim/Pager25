@@ -32,13 +32,14 @@ import java.io.IOException
 class UserProfileActivity : BaseActivity() {
     lateinit var binding: ActivityUserProfileBinding
     lateinit var mUserDetail: User
+   lateinit var mUser : User
     private var mSelectedImageFileUri: Uri? = null
     private var mUserProfileImageURL: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mUserDetail = User()
+
         getExsistData()
         operateAllButtons()
     }
@@ -48,6 +49,7 @@ class UserProfileActivity : BaseActivity() {
 
         if (intent.hasExtra(EXTRA_USER_DETAILS)) {
             mUserDetail = intent.getParcelableExtra(EXTRA_USER_DETAILS)!!
+            mUser=intent.getParcelableExtra(EXTRA_USER_DETAILS)!!
         }
         logi("profile 55   mUserDetail=$mUserDetail")
 

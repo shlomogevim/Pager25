@@ -13,6 +13,8 @@ import com.google.firebase.storage.StorageReference
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.login.activities.*
 import com.sg.pager25.models.User
+import com.sg.pager25.post_activities.AccountPostSettingActivity
+import com.sg.pager25.post_activities.PostDetailsActivity
 import com.sg.pager25.utilities.Constants.LOGGED_IN_USERNAME
 import com.sg.pager25.utilities.Constants.MYSHOPPAL_PREFERENCES
 import com.sg.pager25.utilities.Constants.USERS
@@ -31,7 +33,7 @@ class FirestoreClass {
         // The "users" is collection name. If the collection is already created then it will not create the same one again.
         mFirestore.collection(USERS)
             // Document ID for users fields. Here the document it is the User ID.
-            .document(userInfo.id)
+            .document(userInfo.uid)
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge later on instead of replacing the fields.
             .set(userInfo, SetOptions.merge())
             .addOnSuccessListener {
@@ -54,7 +56,6 @@ class FirestoreClass {
         if (currentUser != null) {
             currentUserID = currentUser.uid
         }
-
         return currentUserID
     }
 
@@ -62,13 +63,11 @@ class FirestoreClass {
         mFirestore.collection(USERS).document(getCurrentUserID())
             .get()
             .addOnSuccessListener { document ->
-                Log.i(activity.javaClass.simpleName, document.toString())
+               //Log.i(activity.javaClass.simpleName, document.toString())
                 // Here we have received the document snapshot which is converted into the User Data model object.
                 val user = document.toObject(User::class.java)!!
 
-                BaseActivity().logi(" firebaseclass 68 user=$user")
-
-                insertToSharedPref(activity,user)
+                 insertToSharedPref(activity,user)             // for what ??
 
                 when (activity) {
                     is LoginActivity -> {
@@ -78,6 +77,10 @@ class FirestoreClass {
                         // Call a function of base activity for transferring the result to it.
                         activity.userDetailsSuccess(user)
                     }
+                    is PostDetailsActivity->{
+                        activity.getUserName(user)
+                    }
+
                 }
             }
 
@@ -141,7 +144,6 @@ class FirestoreClass {
   }
 
     fun uploadImageToCloudStorage(activity: Activity, imageFileURI: Uri?) {
-
         //getting the storage reference
         val sRef: StorageReference = FirebaseStorage.getInstance().reference.child(
             USER_PROFILE_IMAGE + System.currentTimeMillis() + "."
@@ -180,5 +182,7 @@ class FirestoreClass {
                 )
             }
     }
+
+
 
 }

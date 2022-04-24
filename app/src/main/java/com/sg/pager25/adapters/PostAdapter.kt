@@ -2,6 +2,7 @@ package com.sg.pager25.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.sg.pager20.adapters.DrawPostCenter
 import com.sg.pager25.R
+import com.sg.pager25.login.activities.UserProfileActivity
 import com.sg.pager25.models.Post
 import com.sg.pager25.post_activities.PostDetailsActivity
-import com.sg.pager25.utilities.Constants.DETAIL_POST_EXSTRA
+import com.sg.pager25.utilities.Constants
+import com.sg.pager25.utilities.Constants.POST_EXSTRA
 import com.sg.pager25.utilities.UtilityPost
 import kotlin.collections.ArrayList
 
@@ -75,12 +78,16 @@ class PostAdapter(val viewPager: ViewPager2, val context: Context, val posts: Ar
             drawPost.drawPost(post, layout)
 
             postImage.setOnClickListener {
-
                 val intent = Intent(context, PostDetailsActivity::class.java)
-                intent.putExtra(DETAIL_POST_EXSTRA, post.postNum)
+               // intent.putExtra(DETAIL_POST_EXSTRA, post.postNum)
+
+                intent.putExtra(POST_EXSTRA,post)
+
                 context.startActivities(arrayOf(intent))
+
             }
         }
+
         fun bindImageCor(post: Post) {
             val layout = itemView?.findViewById<ConstraintLayout>(R.id.itemLayout)
             drawPost.drawPost(post, layout)

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/back_ui"
+
     android:keepScreenOn="true"
 
     tools:context="post_activities.AccountPostSettingActivity">

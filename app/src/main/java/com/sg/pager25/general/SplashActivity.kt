@@ -38,18 +38,27 @@ class SplashActivity : BaseActivity() {
         Handler().postDelayed(
             {
                 val currentUserID = FirestoreClass().getCurrentUserID()
-         logi("splash 43       currentUserID=$currentUserID")
                 if (currentUserID.isNotEmpty()) {
-                //  startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
-
-
-                  startActivity(Intent(this@SplashActivity, PostMainActivity::class.java))
+//                    logi("splash 44       currentUserID not empty===>currentUserID=$currentUserID  ")
+                    startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
+                    //  startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
                 } else{
+                    logi("splash 50       currentUserID is  empty====>    currentUserID=$currentUserID")
                     startActivity(Intent(this, LoginActivity::class.java))
-                   //util.logi("SlashActivity 50 currentUserID=$currentUserID")
+
+
                 }
                 finish()
             },2
         )
     }
 }
+/* val currentUserID = FirestoreClass().getCurrentUserID()
+
+                if (currentUserID.isNotEmpty()) {
+                    startActivity(Intent(this@SplashActivity, DashboardActivity::class.java))
+                } else{
+                    startActivity(Intent(this,LoginActivity::class.java))
+                }
+                finish()
+            },2500*/

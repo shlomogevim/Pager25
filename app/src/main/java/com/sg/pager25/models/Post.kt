@@ -1,7 +1,10 @@
 package com.sg.pager25.models
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class Post(
     var postId:String="",
     var postNum:Int=1,
@@ -16,5 +19,5 @@ data class Post(
     var postTextColor:ArrayList<String> = arrayListOf<String>(),
     var postFontFamily:Int=0,
     var postRadiuas:Int=0,
-    val timestamp: Timestamp?=null
-)
+    var timestamp: Timestamp?=null
+): Parcelable

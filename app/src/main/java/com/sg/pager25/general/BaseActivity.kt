@@ -8,11 +8,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.Timestamp
 import com.sg.pager25.R
+import com.sg.pager25.models.Post
+import com.sg.pager25.models.PostNew
 
 
 open class BaseActivity : AppCompatActivity() {
-   /* override fun onCreate(savedInstanceState: Bundle?) {
+    /* override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
     }*/
@@ -33,7 +36,7 @@ open class BaseActivity : AppCompatActivity() {
                     R.color.colorSnackBarError
                 )
             )
-        }else{
+        } else {
             snackBarView.setBackgroundColor(
                 ContextCompat.getColor(
                     this@BaseActivity,
@@ -66,6 +69,7 @@ open class BaseActivity : AppCompatActivity() {
     fun hideProgressDialog() {
         mProgressDialog.dismiss()
     }
+
     /**
      * A function to implement the double back press feature to exit the app.
      */
@@ -78,11 +82,13 @@ open class BaseActivity : AppCompatActivity() {
 
         this.doubleBackToExitPressedOnce = true
 
-        Toast.makeText(this,"Please click back again immdiatly to exit ", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Please click back again immdiatly to exit ", Toast.LENGTH_SHORT)
+            .show()
 
         @Suppress("DEPRECATION")
         Handler().postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
     }
+
     fun logi(
         element1: String,
         element2: String = "",
@@ -102,4 +108,5 @@ open class BaseActivity : AppCompatActivity() {
             Log.d("gg", "${element1} ,${element2} ${element3},${element4}")
         }
     }
+
 }
