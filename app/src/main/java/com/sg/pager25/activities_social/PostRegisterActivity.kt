@@ -391,7 +391,7 @@ class PostRegisterActivity : AppCompatActivity() {
             if (value != null) {
                 for (doc in value.documents) {
                     var user = util.retrieveUserFromFirestore(doc)
-                    if (user.firstName == userN) {
+                    if (user.userName == userN) {
                         boIn = true
                     }
                 }

@@ -125,7 +125,7 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
         if (currentUser==null){
             binding.nameCurrentUserName.setText("אנונימי")
         }else{
-            binding.nameCurrentUserName.setText("${currentUser!!.firstName}")
+            binding.nameCurrentUserName.setText("${currentUser!!.userName}")
         }
     }
 

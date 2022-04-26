@@ -264,7 +264,7 @@ class UtilityPost {
         dio = snap?.getString(USER_BIO).toString()
         uid = snap?.getString(FIRESTORE_USER_ID).toString()
 
-        val newUser = User(uid=uid, firstName = userName, lastName = fullName, email, image = profileImage, dio=dio)
+        val newUser = User(uid=uid, userName = userName, lastName = fullName, email, image = profileImage, moto=dio)
         return newUser
     }
     /* val uid: String = "",
@@ -347,7 +347,7 @@ class UtilityPost {
         val dio = snap?.get(USER_BIO).toString()
         val timestamp = snap?.getTimestamp(USER_TIME)
 
-        val newUser = User(uid,name,fullName,email,"",dio=dio)
+        val newUser = User(uid,name,fullName,email,"",moto=dio)
         return newUser
     }
 

@@ -12,9 +12,7 @@ import android.webkit.MimeTypeMap
  */
 object Constants {
 
-    const val USERS: String = "users"
-    const val FIRST_NAME: String = "firstName"
-    const val LAST_NAME: String = "lastName"
+
     const val IMAGE: String = "image"
     const val COMPLETE_PROFILE: String = "profileCompleted"
     const val MYSHOPPAL_PREFERENCES: String = "MyShopPalPrefs"
@@ -62,6 +60,9 @@ object Constants {
     const val USER_EXTRA="user_exstra_two"
 
     const val USER_REF = "users"
+
+    const val USERNAME = "userName"
+    const val LASTNAME = "lastName"
     const val FIRESTORE_USER_ID = "user uid"
     const val USER_ID = "userId"
     const val USER_FULLNAME = "full name"

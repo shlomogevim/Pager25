@@ -11,6 +11,7 @@ import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants
 import com.sg.pager25.utilities.Constants.EXTRA_USER_DETAILS
+import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.GlideLoader
 
 class SettingActivity : BaseActivity(),View.OnClickListener {
@@ -22,23 +23,22 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
         setContentView(binding.root)
 
         currentUser = intent.getParcelableExtra(Constants.USER_EXTRA)!!
-        logi("SettingActivity   25 =======>  /n $currentUser  ")
+       // logi("SettingActivity   26 =======>  /n $currentUser  ")
 
-        binding.tvEdit.setOnClickListener(this)
+        binding.tvEditProfile.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
     }
     override fun onResume() {  // when we load app
         super.onResume()
-
         getUserDetails()
     }
 
     override fun onClick(v: View?) {
         if (v != null) {
             when (v.id) {
-                R.id.tv_edit -> {
+                R.id.tv_editProfile -> {
                     val intent = Intent(this, UserProfileActivity::class.java)
-                    intent.putExtra(EXTRA_USER_DETAILS, currentUser)
+                    intent.putExtra(USER_EXTRA, currentUser)
                     startActivity(intent)
                 }
                 R.id.btn_logout -> {
@@ -53,32 +53,31 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
     }
 
 
-    /**
-     * A function to get the user details from firestore.
-     */
-    private fun getUserDetails() {
-        showProgressDialog(resources.getString(R.string.please_wait))
-        // Call the function of Firestore class to get the user details from firestore which is already created.
-        FirestoreClass().getUserDetails(this)
+       private fun getUserDetails() {
+//        showProgressDialog(resources.getString(R.string.please_wait))
+//        // Call the function of Firestore class to get the user details from firestore which is already created.
+//        FirestoreClass().getUserDetails(this)
+           GlideLoader(this).loadUserPicture(currentUser.image, binding.ivUserPhoto)
+
+           binding.tvUserName.text = currentUser.userName
+           binding.tvLastName.text = currentUser.lastName
+           binding.tvGender.text = "לא ברור עדיין ..."
+           binding.tvMail.text = currentUser.email
     }
 
-    /**
-     * A function to receive the user details and populate it in the UI.
-     */
+
     fun userDetailsSuccess(user: User) {
-
-        currentUser = user
-        hideProgressDialog()
-
-        logi("setting 69 user=$user")
-
-        GlideLoader(this).loadUserPicture(user.image, binding.ivUserPhoto)
-
-        binding.tvName.text = "${user.firstName} ${user.lastName}"
-        binding.tvGender.text = user.gender
-        binding.tvEmail.text = user.email
-        binding.tvMobileNumber.text = "${user.mobile}"
-    }
+//        currentUser = user
+//        hideProgressDialog()
+////        logi("setting 69 user=$user")
+//
+//        GlideLoader(this).loadUserPicture(user.image, binding.ivUserPhoto)
+//
+//        binding.tvUserName.text = user.firstName
+//        binding.tvLastName.text = user.lastName
+//        binding.tvGender.text = "לא ברור עדיין ..."
+//        binding.tvMail.text = user.email
+         }
 }
 
 /**

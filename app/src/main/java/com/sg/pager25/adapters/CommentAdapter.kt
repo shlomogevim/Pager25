@@ -45,11 +45,11 @@ class CommentAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val imageProfile = itemView?.findViewById<CircleImageView>(R.id.user_profile_image_comment)
-        val userNameTV = itemView?.findViewById<TextView>(R.id.user_name_comment)
-        var commentTv = itemView?.findViewById<TextView>(R.id.comment_comment)
-        var commentCardView = itemView?.findViewById<CardView>(R.id.commentCardView)
-        val commentTimeStamp = itemView?.findViewById<TextView>(R.id.commentTimestampTv)
+        val imageProfile = itemView.findViewById<CircleImageView>(R.id.user_profile_image_comment)
+        val userNameTV = itemView.findViewById<TextView>(R.id.user_name_comment)
+        var commentTv = itemView.findViewById<TextView>(R.id.comment_comment)
+        var commentCardView = itemView.findViewById<CardView>(R.id.commentCardView)
+        val commentTimeStamp = itemView.findViewById<TextView>(R.id.commentTimestampTv)
 
         fun bindComment(comment: Comment) {
             setCurrentUserImage(imageProfile, comment)

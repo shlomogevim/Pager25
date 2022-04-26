@@ -18,21 +18,21 @@ import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants
 import com.sg.pager25.utilities.Constants.COMPLETE_PROFILE
-import com.sg.pager25.utilities.Constants.EXTRA_USER_DETAILS
 import com.sg.pager25.utilities.Constants.FEMALE
-import com.sg.pager25.utilities.Constants.FIRST_NAME
 import com.sg.pager25.utilities.Constants.GENDER
 import com.sg.pager25.utilities.Constants.IMAGE
 import com.sg.pager25.utilities.Constants.MALE
 import com.sg.pager25.utilities.Constants.MOBILE
 import com.sg.pager25.utilities.Constants.READ_STORAGE_PERMISSION_CODE
+import com.sg.pager25.utilities.Constants.USERNAME
+import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.GlideLoader
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity() {
     lateinit var binding: ActivityUserProfileBinding
-    lateinit var mUserDetail: User
-   lateinit var mUser : User
+    lateinit var currentUser: User
+
     private var mSelectedImageFileUri: Uri? = null
     private var mUserProfileImageURL: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,47 +40,53 @@ class UserProfileActivity : BaseActivity() {
         binding= ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getExsistData()
-        operateAllButtons()
+        logi("UserProfileActivity 43")
+
+       currentUser=intent.getParcelableExtra(USER_EXTRA)!!
+//
+       getExsistData()
+      //  operateAllButtons()
     }
 
     private fun getExsistData() {
-        logi("profile 50")
 
-        if (intent.hasExtra(EXTRA_USER_DETAILS)) {
-            mUserDetail = intent.getParcelableExtra(EXTRA_USER_DETAILS)!!
-            mUser=intent.getParcelableExtra(EXTRA_USER_DETAILS)!!
-        }
-        logi("profile 55   mUserDetail=$mUserDetail")
+        logi("profile 55   currentUser=$currentUser")
 
 
-        binding.etFirstName.setText(mUserDetail.firstName)
-        binding.etLastName.setText(mUserDetail.lastName)
+        binding.tvUserName.setText(currentUser.userName)
+        binding.tvLastName.setText(currentUser.lastName)
+        binding.tvGender.setText(currentUser.gender)
+      //  binding.tvMoto.setText(currentUser.dio)
 
-        binding.etEmail.isEnabled = false
-        binding.etEmail.setText(mUserDetail.email)
+        GlideLoader(this@UserProfileActivity).loadUserPicture(currentUser.image,binding.ivUserPhoto)
 
-        if (mUserDetail.profileCompleted == 0) {
-            binding.tvTitle.text = resources.getString(R.string.title_complete_profile)
-            binding.etFirstName.isEnabled = false
-            binding.etLastName.isEnabled = false
-        }else{
-            setupActionBar()
-            binding.tvTitle.text = resources.getString(R.string.title_edit_profile)
+//        binding.etEmail.isEnabled = false
+//        binding.etEmail.setText(currentUser.email)
 
-            GlideLoader(this@UserProfileActivity).loadUserPicture(mUserDetail.image,binding.ivUserPhoto)
 
-            // Set the existing values to the UI and allow user to edit except the Email ID.
 
-            if (mUserDetail.mobile != 0L) {
-                binding.etMobileNumber.setText(mUserDetail.mobile.toString())
-            }
-            if (mUserDetail.gender == MALE) {
-                binding.rbMale.isChecked = true
-            } else {
-                binding.rbFemale.isChecked = true
-            }
-        }
+
+//        if (currentUser.profileCompleted == 0) {
+//            binding.tvTitle.text = resources.getString(R.string.title_complete_profile)
+//            binding.etFirstName.isEnabled = false
+//            binding.etLastName.isEnabled = false
+//        }else{
+//            setupActionBar()
+//            binding.tvTitle.text = resources.getString(R.string.title_edit_profile)
+//
+//            GlideLoader(this@UserProfileActivity).loadUserPicture(currentUser.image,binding.ivUserPhoto)
+//
+//            // Set the existing values to the UI and allow user to edit except the Email ID.
+//
+//            if (currentUser.mobile != 0L) {
+//                binding.etMobileNumber.setText(currentUser.mobile.toString())
+//            }
+//            if (currentUser.gender == MALE) {
+//                binding.rbMale.isChecked = true
+//            } else {
+//                binding.rbFemale.isChecked = true
+//            }
+//        }
     }
     private fun setupActionBar() {
 
@@ -115,7 +121,7 @@ class UserProfileActivity : BaseActivity() {
                 )
             }
         }
-        binding.btnSubmit.setOnClickListener {
+        binding.btnSave.setOnClickListener {
             if (validateUserProfileDetails()) {
                 // submitBtnInAction()
                 showProgressDialog(resources.getString(R.string.please_wait))
@@ -131,28 +137,28 @@ class UserProfileActivity : BaseActivity() {
     private fun updateUserProfileDetails() {
         val userHashMap = HashMap<String, Any>()
 
-        val firstName = binding.etFirstName.text.toString().trim { it <= ' ' }
-        if (firstName != mUserDetail.firstName) {
-            userHashMap[FIRST_NAME] = firstName
+        val firstName = binding.tvUserName.text.toString().trim { it <= ' ' }
+        if (firstName != currentUser.userName) {
+            userHashMap[USERNAME] = firstName
         }
-        val lastName = binding.etLastName.text.toString().trim { it <= ' ' }
-        if (lastName != mUserDetail.lastName) {
-            userHashMap[Constants.LAST_NAME] = lastName
-        }
-
-        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
-        if (mobileNumber.isNotEmpty() && mobileNumber != mUserDetail.mobile.toString()) {
-            userHashMap[MOBILE] = mobileNumber.toLong()
+        val lastName = binding.tvLastName.text.toString().trim { it <= ' ' }
+        if (lastName != currentUser.lastName) {
+            userHashMap[Constants.LASTNAME] = lastName
         }
 
-        val gender = if (binding.rbMale.isChecked) {
-            MALE
-        } else {
-            FEMALE
-        }
-        if (gender.isNotEmpty() && gender != mUserDetail.gender) {
-            userHashMap[GENDER] = gender
-        }
+//        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
+//        if (mobileNumber.isNotEmpty() && mobileNumber != currentUser.mobile.toString()) {
+//            userHashMap[MOBILE] = mobileNumber.toLong()
+//        }
+
+//        val gender = if (binding.rbMale.isChecked) {
+//            MALE
+//        } else {
+//            FEMALE
+//        }
+//        if (gender.isNotEmpty() && gender != currentUser.gender) {
+//            userHashMap[GENDER] = gender
+//        }
 
         if (mUserProfileImageURL.isNotEmpty()) {
             userHashMap[IMAGE] = mUserProfileImageURL
@@ -164,7 +170,7 @@ class UserProfileActivity : BaseActivity() {
         // 0: User profile is incomplete.
         // 1: User profile is completed.
 
-        userHashMap[COMPLETE_PROFILE] = 1
+      //  userHashMap[COMPLETE_PROFILE] = 1
 
 
         // call the reg isterUser function of FireStore class to make an entry in the database.
@@ -195,12 +201,13 @@ class UserProfileActivity : BaseActivity() {
 
     private fun validateUserProfileDetails(): Boolean {
         return when {
-            // We have kept the user profile picture is optional.
-            // The FirstName, LastName, and Email Id are not editable when they come from the login screen.
-            // The Radio button for Gender always has the default selected value.
-            // Check if the mobile number is not empty as it is mandatory to enter.
-            TextUtils.isEmpty(binding.etMobileNumber.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar(resources.getString(R.string.err_msg_enter_mobile_number), true)
+
+            TextUtils.isEmpty(binding.tvUserName.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar("הכנס שם משתמש", true)
+                false
+            }
+            TextUtils.isEmpty(binding.tvLastName.text.toString().trim { it <= ' ' }) -> {
+                showErrorSnackBar("הכנס כינוי", true)
                 false
             }
             else -> {

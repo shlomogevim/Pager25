@@ -15,8 +15,8 @@ import com.sg.pager25.models.User
 import com.sg.pager25.activities_social.PostDetailsActivity
 import com.sg.pager25.utilities.Constants.LOGGED_IN_USERNAME
 import com.sg.pager25.utilities.Constants.MYSHOPPAL_PREFERENCES
-import com.sg.pager25.utilities.Constants.USERS
 import com.sg.pager25.utilities.Constants.USER_PROFILE_IMAGE
+import com.sg.pager25.utilities.Constants.USER_REF
 import com.sg.pager25.utilities.Constants.getFileExtension
 import com.sg.pager25.utilities.Utility
 
@@ -29,7 +29,7 @@ class FirestoreClass {
 
     fun registerUser(activity: RegisterActivity, userInfo: User) {
         // The "users" is collection name. If the collection is already created then it will not create the same one again.
-        mFirestore.collection(USERS)
+        mFirestore.collection(USER_REF)
             // Document ID for users fields. Here the document it is the User ID.
             .document(userInfo.uid)
             // Here the userInfo are Field and the SetOption is set to merge. It is for if we wants to merge later on instead of replacing the fields.
@@ -58,7 +58,7 @@ class FirestoreClass {
     }
 
     fun getUserDetails(activity: Activity) {
-        mFirestore.collection(USERS).document(getCurrentUserID())
+        mFirestore.collection(USER_REF).document(getCurrentUserID())
             .get()
             .addOnSuccessListener { document ->
                //Log.i(activity.javaClass.simpleName, document.toString())
@@ -108,14 +108,14 @@ class FirestoreClass {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(
             LOGGED_IN_USERNAME,
-            "${user.firstName} ${user.lastName}"
+            "${user.userName} ${user.lastName}"
         )
         editor.apply()
     }
 
   fun updateUserProfileData(activity: Activity, userHashMap: HashMap<String, Any>) {
       // Collection Name
-      mFirestore.collection(USERS).document(getCurrentUserID()).update(userHashMap)
+      mFirestore.collection(USER_REF).document(getCurrentUserID()).update(userHashMap)
           .addOnSuccessListener {
               when (activity) {
                   is UserProfileActivity -> {

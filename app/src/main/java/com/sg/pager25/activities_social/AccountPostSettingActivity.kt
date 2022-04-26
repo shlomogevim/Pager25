@@ -226,8 +226,8 @@ class AccountPostSettingActivity : BaseActivity() {
                     Picasso.get().load(currentUser?.image).placeholder(R.drawable.profile)
                         .into(binding.profileImage)
                     binding.fullNameProfileFragment.setText(currentUser?.lastName)
-                    binding.usernameProfileFrag.setText(currentUser?.firstName)
-                    binding.bioProfileFragment.setText(currentUser?.dio)
+                    binding.usernameProfileFrag.setText(currentUser?.userName)
+                    binding.bioProfileFragment.setText(currentUser?.moto)
 
     }
 
