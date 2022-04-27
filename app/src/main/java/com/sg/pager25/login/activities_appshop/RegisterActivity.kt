@@ -34,15 +34,6 @@ class RegisterActivity : BaseActivity() {
 
     }
 
-    private fun setupActionBar() {
-        setSupportActionBar(binding.toolbarRegisterActivity)
-        val actionBar = supportActionBar
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true)
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back)
-        }
-        binding.toolbarRegisterActivity.setNavigationOnClickListener { onBackPressed() }
-    }
 
     private fun validateRegisterDetails(): Boolean {
         return when {
@@ -139,12 +130,19 @@ class RegisterActivity : BaseActivity() {
             Toast.LENGTH_SHORT
         ).show()
 
-
-        /**
-         * Here the new user registered is automatically signed-in so we just sign-out the user from firebase
-         * and send him to Intro Screen for Sign-In
-         */
         FirebaseAuth.getInstance().signOut()
         finish()
     }
 }
+
+
+
+//    private fun setupActionBar() {
+//        setSupportActionBar(binding.toolbarRegisterActivity)
+//        val actionBar = supportActionBar
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true)
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back)
+//        }
+//        binding.toolbarRegisterActivity.setNavigationOnClickListener { onBackPressed() }
+//    }

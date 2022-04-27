@@ -11,6 +11,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.sg.pager25.R
 import com.sg.pager25.databinding.ActivityUserProfileBinding
 import com.sg.pager25.firestore.FirestoreClass
@@ -23,10 +24,13 @@ import com.sg.pager25.utilities.Constants.GENDER
 import com.sg.pager25.utilities.Constants.IMAGE
 import com.sg.pager25.utilities.Constants.MALE
 import com.sg.pager25.utilities.Constants.MOBILE
+import com.sg.pager25.utilities.Constants.PICK_IMAGE_REQUEST_CODE
 import com.sg.pager25.utilities.Constants.READ_STORAGE_PERMISSION_CODE
 import com.sg.pager25.utilities.Constants.USERNAME
 import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.GlideLoader
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import java.io.IOException
 
 class UserProfileActivity : BaseActivity() {
@@ -45,92 +49,55 @@ class UserProfileActivity : BaseActivity() {
        currentUser=intent.getParcelableExtra(USER_EXTRA)!!
 //
        getExsistData()
-      //  operateAllButtons()
+        operateAllButtons()
     }
 
     private fun getExsistData() {
-
-        logi("profile 55   currentUser=$currentUser")
-
-
+   //     logi("profile 55   currentUser=$currentUser")
         binding.tvUserName.setText(currentUser.userName)
         binding.tvLastName.setText(currentUser.lastName)
         binding.tvGender.setText(currentUser.gender)
-      //  binding.tvMoto.setText(currentUser.dio)
+      binding.tvMoto.setText(currentUser.moto)
 
         GlideLoader(this@UserProfileActivity).loadUserPicture(currentUser.image,binding.ivUserPhoto)
-
-//        binding.etEmail.isEnabled = false
-//        binding.etEmail.setText(currentUser.email)
-
-
-
-
-//        if (currentUser.profileCompleted == 0) {
-//            binding.tvTitle.text = resources.getString(R.string.title_complete_profile)
-//            binding.etFirstName.isEnabled = false
-//            binding.etLastName.isEnabled = false
-//        }else{
-//            setupActionBar()
-//            binding.tvTitle.text = resources.getString(R.string.title_edit_profile)
-//
-//            GlideLoader(this@UserProfileActivity).loadUserPicture(currentUser.image,binding.ivUserPhoto)
-//
-//            // Set the existing values to the UI and allow user to edit except the Email ID.
-//
-//            if (currentUser.mobile != 0L) {
-//                binding.etMobileNumber.setText(currentUser.mobile.toString())
-//            }
-//            if (currentUser.gender == MALE) {
-//                binding.rbMale.isChecked = true
-//            } else {
-//                binding.rbFemale.isChecked = true
-//            }
-//        }
     }
-    private fun setupActionBar() {
 
-        /*    setSupportActionBar(toolbar_user_profile_activity)
-
-            val actionBar = supportActionBar
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true)
-                actionBar.setHomeAsUpIndicator(R.drawable.ic_white_color_back_24dp)
-            }
-
-            toolbar_user_profile_activity.setNavigationOnClickListener { onBackPressed() }*/
-    }
 
     private fun operateAllButtons() {
         binding.ivUserPhoto.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    this, Manifest.permission.READ_EXTERNAL_STORAGE
-                )
-                == PackageManager.PERMISSION_GRANTED
-            ) {
-                // showErrorSnackBar("You have already storage permission",false)
-                Constants.showImageChooser(this@UserProfileActivity)
-            } else {
-                /*Requests permissions to be granted to this application. These permissions
-                 must be requested in your manifest, they should not be granted to your app,
-                 and they should have protection level*/
-                ActivityCompat.requestPermissions(
-                    this,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    READ_STORAGE_PERMISSION_CODE
-                )
-            }
+            findImage()
         }
         binding.btnSave.setOnClickListener {
             if (validateUserProfileDetails()) {
                 // submitBtnInAction()
                 showProgressDialog(resources.getString(R.string.please_wait))
                 if (mSelectedImageFileUri != null) {
-                    FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+                    logi("UserProileActivity  75      mSelectedImageFileUri=$mSelectedImageFileUri")
+                  FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
                 } else {
                     updateUserProfileDetails()
                 }
             }
+        }
+    }
+
+    private fun findImage() {
+        if (ContextCompat.checkSelfPermission(
+                this, Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            == PackageManager.PERMISSION_GRANTED
+        ) {
+            // showErrorSnackBar("You have already storage permission",false)
+            Constants.showImageChooser(this@UserProfileActivity)
+        } else {
+            /*Requests permissions to be granted to this application. These permissions
+             must be requested in your manifest, they should not be granted to your app,
+             and they should have protection level*/
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                READ_STORAGE_PERMISSION_CODE
+            )
         }
     }
 
@@ -146,26 +113,11 @@ class UserProfileActivity : BaseActivity() {
             userHashMap[Constants.LASTNAME] = lastName
         }
 
-//        val mobileNumber = binding.etMobileNumber.text.toString().trim { it <= ' ' }
-//        if (mobileNumber.isNotEmpty() && mobileNumber != currentUser.mobile.toString()) {
-//            userHashMap[MOBILE] = mobileNumber.toLong()
-//        }
-
-//        val gender = if (binding.rbMale.isChecked) {
-//            MALE
-//        } else {
-//            FEMALE
-//        }
-//        if (gender.isNotEmpty() && gender != currentUser.gender) {
-//            userHashMap[GENDER] = gender
-//        }
-
         if (mUserProfileImageURL.isNotEmpty()) {
             userHashMap[IMAGE] = mUserProfileImageURL
         }
-        if (mUserProfileImageURL.isNotEmpty()) {
-            userHashMap[IMAGE] = mUserProfileImageURL
-        }
+
+
         // Here if user is about to complete the profile then update the field or else no need.
         // 0: User profile is incomplete.
         // 1: User profile is completed.
@@ -177,9 +129,6 @@ class UserProfileActivity : BaseActivity() {
         FirestoreClass().updateUserProfileData(this@UserProfileActivity, userHashMap)
     }
 
-    /**
-     * A function to notify the success result and proceed further accordingly after updating the user details.
-     */
     fun userProfileUpdateSuccess() {
         hideProgressDialog()
         Toast.makeText(
@@ -187,7 +136,6 @@ class UserProfileActivity : BaseActivity() {
             resources.getString(R.string.msg_profile_update_success),
             Toast.LENGTH_SHORT
         ).show()
-
         startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
         finish()
     }
@@ -203,11 +151,13 @@ class UserProfileActivity : BaseActivity() {
         return when {
 
             TextUtils.isEmpty(binding.tvUserName.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar("הכנס שם משתמש", true)
+//                showErrorSnackBar("הכנס שם משתמש", true)
+                showErrorSnackBar(resources.getString(R.string.empty_userName_tv), true)
                 false
             }
             TextUtils.isEmpty(binding.tvLastName.text.toString().trim { it <= ' ' }) -> {
-                showErrorSnackBar("הכנס כינוי", true)
+              //  showErrorSnackBar("הכנס כינוי", true)
+                showErrorSnackBar(resources.getString(R.string.empty_nickName_tv), true)
                 false
             }
             else -> {
@@ -216,34 +166,43 @@ class UserProfileActivity : BaseActivity() {
         }
     }
 
-
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == Constants.PICK_IMAGE_REQUEST_CODE) {
-                if (data != null) {
-                    try {
-                        // The uri of selected image from phone storage.
-                        mSelectedImageFileUri = data.data!!
-                        // binding.ivUserPhoto.setImageURI(selectedImageFileUri)
-                        GlideLoader(this@UserProfileActivity).loadUserPicture(
-                            mSelectedImageFileUri!!, binding.ivUserPhoto
-                        )
-                    } catch (e: IOException) {
-                        e.printStackTrace()
-                        Toast.makeText(
-                            this@UserProfileActivity,
-                            resources.getString(R.string.image_selection_failed),
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+
+        when (requestCode) {
+            PICK_IMAGE_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    data?.data?.let { uri ->
+                        launchImageCrop(uri)
                     }
+                } else {
+                    Log.d("ImageCropping", "onActivityResult: Couldn't select that image from gallery")
                 }
             }
-        } else if (resultCode == Activity.RESULT_CANCELED) {
-            // A log is printed when user close or cancel the image selection.
-            Log.e("Request Cancelled", "Image selection cancelled")
+            CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
+                val result = CropImage.getActivityResult(data)
+                if (resultCode == Activity.RESULT_OK) {
+                    setImage(result.uri)
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    Log.d("ImageCropping", "onActivityResult: ${result.error}")
+                }
+            }
         }
+
+    }
+    private fun launchImageCrop(uri: Uri) {
+        CropImage.activity(uri)
+            .setGuidelines(CropImageView.Guidelines.ON)
+            .setAspectRatio(1920, 1080)
+            .setCropShape(CropImageView.CropShape.RECTANGLE)
+            .start(this)
+    }
+
+    private fun setImage(uri: Uri) {
+        mSelectedImageFileUri=uri
+        Glide.with(this)
+            .load(uri)
+            .into(binding.ivUserPhoto)
     }
 
     override fun onRequestPermissionsResult(
@@ -268,5 +227,36 @@ class UserProfileActivity : BaseActivity() {
     }
 
 }
+
+
+
+/* public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE_REQUEST_CODE) {
+                if (data != null) {
+                    try {
+                        // The uri of selected image from phone storage.
+                        mSelectedImageFileUri = data.data!!
+                        // binding.ivUserPhoto.setImageURI(selectedImageFileUri)
+                        GlideLoader(this@UserProfileActivity).loadUserPicture(
+                            mSelectedImageFileUri!!, binding.ivUserPhoto
+                        )
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                        Toast.makeText(
+                            this@UserProfileActivity,
+                            resources.getString(R.string.image_selection_failed),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            // A log is printed when user close or cancel the image selection.
+            Log.e("Request Cancelled", "Image selection cancelled")
+        }
+    }*/
 
 
