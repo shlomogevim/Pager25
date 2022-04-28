@@ -20,14 +20,16 @@ import com.sg.pager25.models.User
 import com.sg.pager25.utilities.Constants
 import com.sg.pager25.utilities.Constants.COMPLETE_PROFILE
 import com.sg.pager25.utilities.Constants.FEMALE
-import com.sg.pager25.utilities.Constants.GENDER
 import com.sg.pager25.utilities.Constants.IMAGE
+import com.sg.pager25.utilities.Constants.LASTNAME
 import com.sg.pager25.utilities.Constants.MALE
 import com.sg.pager25.utilities.Constants.MOBILE
 import com.sg.pager25.utilities.Constants.PICK_IMAGE_REQUEST_CODE
 import com.sg.pager25.utilities.Constants.READ_STORAGE_PERMISSION_CODE
 import com.sg.pager25.utilities.Constants.USERNAME
 import com.sg.pager25.utilities.Constants.USER_EXTRA
+import com.sg.pager25.utilities.Constants.USER_GENDER
+import com.sg.pager25.utilities.Constants.USER_MOTO
 import com.sg.pager25.utilities.GlideLoader
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -44,39 +46,41 @@ class UserProfileActivity : BaseActivity() {
         binding= ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        logi("UserProfileActivity 43")
+        currentUser=intent.getParcelableExtra(USER_EXTRA)!!
+//        logi("UserProfileActivity 48          currentUser=$currentUser")
 
-       currentUser=intent.getParcelableExtra(USER_EXTRA)!!
-//
-       getExsistData()
-        operateAllButtons()
+       dratExistData()
+        binding.ivUserPhoto.setOnClickListener {
+            findImage()
+        }
+        binding.btnSave.setOnClickListener {
+            saveDetails()
+        }
     }
 
-    private fun getExsistData() {
+    private fun dratExistData() {
    //     logi("profile 55   currentUser=$currentUser")
         binding.tvUserName.setText(currentUser.userName)
-        binding.tvLastName.setText(currentUser.lastName)
+        binding.tvLastName.setText(currentUser.nickName)
         binding.tvGender.setText(currentUser.gender)
-      binding.tvMoto.setText(currentUser.moto)
+       binding.tvMoto.setText(currentUser.moto)
 
         GlideLoader(this@UserProfileActivity).loadUserPicture(currentUser.image,binding.ivUserPhoto)
     }
 
 
-    private fun operateAllButtons() {
-        binding.ivUserPhoto.setOnClickListener {
-            findImage()
-        }
-        binding.btnSave.setOnClickListener {
-            if (validateUserProfileDetails()) {
-                // submitBtnInAction()
-                showProgressDialog(resources.getString(R.string.please_wait))
-                if (mSelectedImageFileUri != null) {
-                    logi("UserProileActivity  75      mSelectedImageFileUri=$mSelectedImageFileUri")
-                  FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
-                } else {
-                    updateUserProfileDetails()
-                }
+    private fun saveDetails() {
+
+        if (validateUserProfileDetails()) {
+            // submitBtnInAction()
+            showProgressDialog(resources.getString(R.string.please_wait))
+          //  logi("UserProileActivity  74      mSelectedImageFileUri=$mSelectedImageFileUri")
+
+            if (mSelectedImageFileUri != null) {
+              // logi("UserProileActivity  75      mSelectedImageFileUri=$mSelectedImageFileUri")
+                FirestoreClass().uploadImageToCloudStorage(this, mSelectedImageFileUri)
+            } else {
+                updateUserProfileDetails()
             }
         }
     }
@@ -90,10 +94,7 @@ class UserProfileActivity : BaseActivity() {
             // showErrorSnackBar("You have already storage permission",false)
             Constants.showImageChooser(this@UserProfileActivity)
         } else {
-            /*Requests permissions to be granted to this application. These permissions
-             must be requested in your manifest, they should not be granted to your app,
-             and they should have protection level*/
-            ActivityCompat.requestPermissions(
+               ActivityCompat.requestPermissions(
                 this,
                 arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 READ_STORAGE_PERMISSION_CODE
@@ -109,8 +110,16 @@ class UserProfileActivity : BaseActivity() {
             userHashMap[USERNAME] = firstName
         }
         val lastName = binding.tvLastName.text.toString().trim { it <= ' ' }
-        if (lastName != currentUser.lastName) {
-            userHashMap[Constants.LASTNAME] = lastName
+        if (lastName != currentUser.nickName) {
+            userHashMap[LASTNAME] = lastName
+        }
+        val gender = binding.tvGender.text.toString().trim { it <= ' ' }
+        if (gender != currentUser.gender) {
+            userHashMap[USER_GENDER] = gender
+        }
+        val moto = binding.tvMoto.text.toString().trim { it <= ' ' }
+        if (moto != currentUser.moto) {
+            userHashMap[USER_MOTO] = moto
         }
 
         if (mUserProfileImageURL.isNotEmpty()) {
@@ -118,14 +127,7 @@ class UserProfileActivity : BaseActivity() {
         }
 
 
-        // Here if user is about to complete the profile then update the field or else no need.
-        // 0: User profile is incomplete.
-        // 1: User profile is completed.
-
-      //  userHashMap[COMPLETE_PROFILE] = 1
-
-
-        // call the reg isterUser function of FireStore class to make an entry in the database.
+            //  logi("UserProfileActivity  130        userHashMap=$userHashMap")
         FirestoreClass().updateUserProfileData(this@UserProfileActivity, userHashMap)
     }
 
@@ -136,7 +138,7 @@ class UserProfileActivity : BaseActivity() {
             resources.getString(R.string.msg_profile_update_success),
             Toast.LENGTH_SHORT
         ).show()
-        startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
+        startActivity(Intent(this@UserProfileActivity, SettingActivity::class.java))
         finish()
     }
 
@@ -193,7 +195,8 @@ class UserProfileActivity : BaseActivity() {
     private fun launchImageCrop(uri: Uri) {
         CropImage.activity(uri)
             .setGuidelines(CropImageView.Guidelines.ON)
-            .setAspectRatio(1920, 1080)
+          // .setAspectRatio(1920, 1080)
+            .setAspectRatio(1, 1)
             .setCropShape(CropImageView.CropShape.RECTANGLE)
             .start(this)
     }

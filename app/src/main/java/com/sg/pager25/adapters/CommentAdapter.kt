@@ -70,7 +70,7 @@ class CommentAdapter(
         }
 
         private fun setCurrentUserImage(imageProfile: CircleImageView?, comment: Comment) {
-            var uid = comment.userId
+           /* var uid = comment.userId
             FirebaseFirestore.getInstance().collection(USER_REF).document(uid).get()
                 .addOnSuccessListener {
                     val user: User = util.convertToUser(it)
@@ -80,7 +80,7 @@ class CommentAdapter(
                             .into(imageProfile)
                     }
 
-                }
+                }*/
 
         }
 

@@ -38,10 +38,10 @@ class SplashActivity : BaseActivity() {
     private fun pauseIt() {
         Handler().postDelayed(
             {
-                val currentUserID = FirestoreClass().getCurrentUserID()
-             logi("splash 42       currentUserID not empty===>currentUserI" +
-                     "D=$currentUserID  ")
+                var currentUserID = FirestoreClass().getCurrentUserID()
 
+             logi("splash 42       currentUserID not empty===>currentUserI=$currentUserID  ")
+            //                       currentUserID=""
                 if (currentUserID.isNotEmpty()) {
 //                    logi("splash 44       currentUserID not empty===>currentUserID=$currentUserID  ")
               //      startActivity(Intent(this@SplashActivity, LoginActivity::class.java))

@@ -29,7 +29,9 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
     }
 
     private fun DemiData() {
-        binding.etEmail.setText("shlomo.gevim@gmail.com")
+//        binding.etEmail.setText("shlomo.gevim@gmail.com")
+//        binding.etPassword.setText("111111")
+        binding.etEmail.setText("aa@aa.com")
         binding.etPassword.setText("111111")
     }
 

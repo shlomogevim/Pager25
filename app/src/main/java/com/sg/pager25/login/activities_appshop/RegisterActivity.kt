@@ -93,8 +93,7 @@ class RegisterActivity : BaseActivity() {
         // Check with validate function if the entries are valid or not.
         if (validateRegisterDetails()) {
 
-            // Show the progress dialog.
-            showProgressDialog(resources.getString(R.string.please_wait))
+             showProgressDialog(resources.getString(R.string.please_wait))
 
             val email: String = binding.etEmail.text.toString().trim { it <= ' ' }
             val password: String = binding.etPassword.text.toString().trim { it <= ' ' }

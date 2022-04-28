@@ -71,11 +71,7 @@ class FirestoreClass {
                     is LoginActivity -> {
                         activity.userLoggedInSuccess(user)
                     }
-                    is SettingActivity ->{
-                        // Call a function of base activity for transferring the result to it.
-                        activity.userDetailsSuccess(user)
-                    }
-                    is PostDetailsActivity->{
+                     is PostDetailsActivity->{
                         activity.getUserName(user)
                     }
 
@@ -108,7 +104,7 @@ class FirestoreClass {
         val editor: SharedPreferences.Editor = sharedPreferences.edit()
         editor.putString(
             LOGGED_IN_USERNAME,
-            "${user.userName} ${user.lastName}"
+            "${user.userName} ${user.nickName}"
         )
         editor.apply()
     }

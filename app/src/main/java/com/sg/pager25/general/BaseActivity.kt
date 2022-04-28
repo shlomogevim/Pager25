@@ -96,7 +96,7 @@ open class BaseActivity : AppCompatActivity() {
         element4: String = ""
     ) {
         if (element1 != "" && element2 == "" && element3 == "" && element4 == "") {
-            Log.d("gg", "${element1}")
+            Log.d("gggg", "${element1}")
         }
         if (element1 != "" && element2 != "" && element3 == "" && element4 == "") {
             Log.d("gg", "${element1} ,${element2}")

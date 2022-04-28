@@ -23,6 +23,8 @@ import com.sg.pager25.databinding.ActivityAccountPostSettingBinding
 import com.sg.pager25.firestore.FirestoreClass
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
+import com.sg.pager25.utilities.Constants.LASTNAME
+import com.sg.pager25.utilities.Constants.USERNAME
 import com.sg.pager25.utilities.Constants.USER_BIO
 import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.Constants.USER_FULLNAME
@@ -137,9 +139,9 @@ class AccountPostSettingActivity : BaseActivity() {
             else -> {
 
                 val data = HashMap<String, Any>()
-                data[USER_FULLNAME] = binding.fullNameProfileFragment.text.toString()
+                data[LASTNAME] = binding.fullNameProfileFragment.text.toString()
                     .lowercase(Locale.getDefault())
-                data[USER_USERNAME] = binding.usernameProfileFrag.text.toString()
+                data[USERNAME] = binding.usernameProfileFrag.text.toString()
                     .lowercase(Locale.getDefault())
                 data[USER_BIO] = binding.bioProfileFragment.text.toString()
                     .lowercase(Locale.getDefault())
@@ -225,9 +227,9 @@ class AccountPostSettingActivity : BaseActivity() {
     private fun userInfo() {
                     Picasso.get().load(currentUser?.image).placeholder(R.drawable.profile)
                         .into(binding.profileImage)
-                    binding.fullNameProfileFragment.setText(currentUser?.lastName)
+                    binding.fullNameProfileFragment.setText(currentUser?.nickName)
                     binding.usernameProfileFrag.setText(currentUser?.userName)
-                    binding.bioProfileFragment.setText(currentUser?.moto)
+                    binding.bioProfileFragment.setText(currentUser?.userName)
 
     }
 

@@ -19,13 +19,10 @@ import com.sg.pager25.utilities.Constants.POST_REF
 import com.sg.pager25.utilities.Constants.SHAR_PREF
 import com.sg.pager25.utilities.Constants.USER_BIO
 import com.sg.pager25.utilities.Constants.USER_EMAIL
-import com.sg.pager25.utilities.Constants.USER_FULLNAME
-import com.sg.pager25.utilities.Constants.USER_ID
 import com.sg.pager25.utilities.Constants.USER_IMAGE
 import com.sg.pager25.utilities.Constants.USER_PASSWORD
 import com.sg.pager25.utilities.Constants.USER_REF
 import com.sg.pager25.utilities.Constants.USER_TIME
-import com.sg.pager25.utilities.Constants.USER_USERNAME
 import com.sg.pager25.utilities.Utilities1
 import com.sg.pager25.utilities.UtilityPost
 import kotlinx.coroutines.CoroutineScope
@@ -237,7 +234,7 @@ class PostRegisterActivity : AppCompatActivity() {
                 result.user?.updateProfile(changeRequest)?.addOnFailureListener {
                     //   util.logi("RegisterActivity  94  failler ==> ${it.localizedMessage}")
                 }
-                saveUserInfo(fullNameString, nameString, emailString, passwordString)
+              //saveUserInfo(fullNameString, nameString, emailString, passwordString)
             }.addOnFailureListener {
                 boo = false
                 //  util.logi("RegisterActivity  133   inside createNewUser  ==> ${it.localizedMessage}")
@@ -504,7 +501,7 @@ class PostRegisterActivity : AppCompatActivity() {
         return posts
     }
 
-    private fun saveUserInfo(fullName: String, userName: String, email: String, password: String) {
+   /* private fun saveUserInfo(fullName: String, userName: String, email: String, password: String) {
         // util.logi("SignUpActivity 120   userNameString=$userNameString   fullName=$fullName    email=$email  password=$password")
         val data = HashMap<String, Any>()
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -532,7 +529,7 @@ class PostRegisterActivity : AppCompatActivity() {
                 FirebaseAuth.getInstance().signOut()
 
             }
-    }
+    }*/
 
     private fun testBtn() {
         binding.aBtn.setOnClickListener {

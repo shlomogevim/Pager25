@@ -22,11 +22,11 @@ import com.sg.pager25.utilities.Constants.SHAR_PREF
 import com.sg.pager25.utilities.Constants.USER_BIO
 import com.sg.pager25.utilities.Constants.USER_EMAIL
 import com.sg.pager25.utilities.Constants.USER_FULLNAME
-import com.sg.pager25.utilities.Constants.USER_ID
 import com.sg.pager25.utilities.Constants.USER_IMAGE
 import com.sg.pager25.utilities.Constants.USER_PASSWORD
 import com.sg.pager25.utilities.Constants.USER_REF
 import com.sg.pager25.utilities.Constants.USER_TIME
+import com.sg.pager25.utilities.Constants.USER_UID
 import com.sg.pager25.utilities.Constants.USER_USERNAME
 import com.sg.pager25.utilities.UtilityPost
 import java.util.*
@@ -161,7 +161,7 @@ class SignUpPostActivity : AppCompatActivity() {
 
         val data=HashMap<String,Any>()
         val uid = FirebaseAuth.getInstance().currentUser?.uid
-        data[USER_ID] = uid!!
+        data[USER_UID] = uid!!
         data[USER_FULLNAME] = fullName.lowercase(Locale.getDefault())
         data[USER_USERNAME] = userName.lowercase(Locale.getDefault())
         data[USER_EMAIL] = email

@@ -23,8 +23,7 @@ object Constants {
     const val MALE: String = "Male"
     const val FEMALE: String = "Female"
     const val MOBILE: String = "mobile"
-    const val GENDER: String = "gender"
-    const val USER_PROFILE_IMAGE: String = "User_Profile_Image"
+
 
     //---------------------------------------------------------------
     const val SHAR_PREF = "char_pref"
@@ -59,21 +58,30 @@ object Constants {
     const val POST_EXSTRA="post_exstra"
     const val USER_EXTRA="user_exstra_two"
 
-    const val USER_REF = "users"
+    const val USER_REF = "New users"
 
     const val USERNAME = "userName"
-    const val LASTNAME = "lastName"
-    const val FIRESTORE_USER_ID = "user uid"
-    const val USER_ID = "userId"
-    const val USER_FULLNAME = "full name"
-    const val USER_USERNAME = "user name"
+    const val NICKNAME="nickname"
     const val USER_EMAIL = "user email"
+    const val USER_GENDER= "userGender"
+    const val USER_MOTO= "userMoto"
     const val USER_PASSWORD = "user password"
-    const val USER_BIO = "user bio"
     const val USER_IMAGE = "user image"
+    const val USER_UID = "userUid"
+
+
+
+
+
+    const val FIRESTORE_USER_ID = "user uid1"
+    const val USER_FULLNAME = "full name1"
+   const val USER_USERNAME="user name1"
+    const val LASTNAME = "lastName1"
+
+    const val USER_BIO = "user bio"
+
     const val USER_TIME = "user time"
-    const val USER_IDEXSRTA = "user_idexstra"
-    const val USER_USERNAMEEXSRTA = "user_usernameexstra"
+    const val USER_PROFILE_IMAGE: String = "User_Profile_Image"
 
     const val COMMENT_REF = "Comments"
     const val COMMENT_LIST = "Comment List"
@@ -85,9 +93,6 @@ object Constants {
     const val COMMEND_TIME_STAMP = "comment_time_stamp"
 
     const val DIALOG_EXSTRA = "dealogexstra"
-
-
-
 
 
     fun showImageChooser(activity: Activity) {

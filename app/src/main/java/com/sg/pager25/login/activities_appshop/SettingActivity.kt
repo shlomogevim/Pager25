@@ -30,7 +30,7 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
     }
     override fun onResume() {  // when we load app
         super.onResume()
-        getUserDetails()
+        drawUserDetails()
     }
 
     override fun onClick(v: View?) {
@@ -53,31 +53,20 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
     }
 
 
-       private fun getUserDetails() {
+       private fun drawUserDetails() {
 //        showProgressDialog(resources.getString(R.string.please_wait))
 //        // Call the function of Firestore class to get the user details from firestore which is already created.
 //        FirestoreClass().getUserDetails(this)
            GlideLoader(this).loadUserPicture(currentUser.image, binding.ivUserPhoto)
 
            binding.tvUserName.text = currentUser.userName
-           binding.tvLastName.text = currentUser.lastName
-           binding.tvGender.text = "לא ברור עדיין ..."
+           binding.tvLastName.text = currentUser.nickName
            binding.tvMail.text = currentUser.email
+           binding.tvGender.text =currentUser.gender
+          binding.tvMoto.text=currentUser.moto
     }
 
 
-    fun userDetailsSuccess(user: User) {
-//        currentUser = user
-//        hideProgressDialog()
-////        logi("setting 69 user=$user")
-//
-//        GlideLoader(this).loadUserPicture(user.image, binding.ivUserPhoto)
-//
-//        binding.tvUserName.text = user.firstName
-//        binding.tvLastName.text = user.lastName
-//        binding.tvGender.text = "לא ברור עדיין ..."
-//        binding.tvMail.text = user.email
-         }
 }
 
 /**

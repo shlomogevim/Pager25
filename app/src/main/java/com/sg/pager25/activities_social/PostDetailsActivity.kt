@@ -66,8 +66,17 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
     override fun onStart() {
         super.onStart()
         FirestoreClass().getUserDetails(this)
-
     }
+    fun getUserName(user: User) {
+        currentUser=user
+        if (currentUser==null){
+            binding.nameCurrentUserName.setText("אנונימי")
+        }else{
+            binding.nameCurrentUserName.setText("${currentUser!!.userName}")
+        }
+    }
+
+
     private fun operateButtoms() {
         /* binding.signUpBtn.setOnClickListener {
              startActivity(Intent(this, SignUpActivity::class.java))
@@ -115,19 +124,6 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
 
     }
 
-     fun getUserName(user: User) {
-        currentUser=user
-        drawUserName()
-    }
-
-    fun  drawUserName(){
-//        logi("PostDetailsActivity 232   currentUser= $currentUser")
-        if (currentUser==null){
-            binding.nameCurrentUserName.setText("אנונימי")
-        }else{
-            binding.nameCurrentUserName.setText("${currentUser!!.userName}")
-        }
-    }
 
     private fun drawHeadline() {
         val num = currentPost.postNum

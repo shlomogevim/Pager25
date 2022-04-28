@@ -7,12 +7,12 @@ import kotlinx.parcelize.Parcelize
 data class User(
     val uid: String = "",
     val userName: String = "",
-    val lastName: String = "",
+    val nickName: String = "",
     val email: String = "",
     val image: String = "",
     val mobile: Long = 0,
     val gender: String = "",
-    var moto: String = "החיים זה מה שזה ...",
+    val moto: String = "החיים זה מה שזה ...",
     val profileCompleted: Int = 0
 ) : Parcelable
 

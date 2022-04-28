@@ -44,10 +44,10 @@ import com.sg.pager25.utilities.Constants.POST_TRANPARECY
 import com.sg.pager25.utilities.Constants.USER_BIO
 import com.sg.pager25.utilities.Constants.USER_EMAIL
 import com.sg.pager25.utilities.Constants.USER_FULLNAME
-import com.sg.pager25.utilities.Constants.USER_ID
 import com.sg.pager25.utilities.Constants.USER_IMAGE
 import com.sg.pager25.utilities.Constants.USER_PASSWORD
 import com.sg.pager25.utilities.Constants.USER_TIME
+import com.sg.pager25.utilities.Constants.USER_UID
 import com.sg.pager25.utilities.Constants.USER_USERNAME
 
 
@@ -249,7 +249,7 @@ class UtilityPost {
                })
            alertDialog.show()
        }*/
-    fun convertToUser(snap: DocumentSnapshot?): User {
+    /*fun convertToUser(snap: DocumentSnapshot?): User {
         var userName =""
         var fullName = "no fullName"
         var email: String = "no email"
@@ -264,9 +264,9 @@ class UtilityPost {
         dio = snap?.getString(USER_BIO).toString()
         uid = snap?.getString(FIRESTORE_USER_ID).toString()
 
-        val newUser = User(uid=uid, userName = userName, lastName = fullName, email, image = profileImage, moto=dio)
+        val newUser = User(uid=uid, userName = userName, nickName = fullName, email, image = profileImage, moto=dio)
         return newUser
-    }
+    }*/
     /* val uid: String = "",
     val firstName: String = "",
     val lastName: String = "",
@@ -339,7 +339,7 @@ class UtilityPost {
 
     fun retrieveUserFromFirestore(snap: DocumentSnapshot?): User {
 
-        val uid = snap?.get(USER_ID).toString()
+        val uid = snap?.get(USER_UID).toString()
         val fullName = snap?.get(USER_FULLNAME).toString()
         val name = snap?.get(USER_USERNAME).toString()
         val email = snap?.get(USER_EMAIL).toString()
