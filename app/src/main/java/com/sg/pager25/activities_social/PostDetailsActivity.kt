@@ -53,19 +53,19 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
         createTextViewArray()
         setContentView(binding.root)
 
-        if (intent.hasExtra(POST_EXSTRA)) {
+     /*   if (intent.hasExtra(POST_EXSTRA)) {
             currentPost = intent.getParcelableExtra(POST_EXSTRA)!!
-        }
+        }*/
       //  logi("PostDetailActivity  68          currentPost===>> $currentPost  /n")
 
-       create_commentsRv()
-         operateButtoms()
-        createComments()
+//       create_commentsRv()
+//         operateButtoms()
+//        createComments()
     }
 
     override fun onStart() {
         super.onStart()
-        FirestoreClass().getUserDetails(this)
+      FirestoreClass().getUserDetails(this)
 
     }
     private fun operateButtoms() {
