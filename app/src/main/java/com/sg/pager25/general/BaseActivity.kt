@@ -95,17 +95,18 @@ open class BaseActivity : AppCompatActivity() {
         element3: String = "",
         element4: String = ""
     ) {
+        val st="gggg"
         if (element1 != "" && element2 == "" && element3 == "" && element4 == "") {
-            Log.d("gg", "${element1}")
+            Log.d(st, "${element1}")
         }
         if (element1 != "" && element2 != "" && element3 == "" && element4 == "") {
-            Log.d("gg", "${element1} ,${element2}")
+            Log.d(st, "${element1} ,${element2}")
         }
         if (element1 != "" && element2 != "" && element3 != "" && element4 == "") {
-            Log.d("gg", "${element1} ,${element2} ,${element3}")
+            Log.d(st, "${element1} ,${element2} ,${element3}")
         }
         if (element1 != "" && element2 != "" && element3 != "" && element4 != "") {
-            Log.d("gg", "${element1} ,${element2} ${element3},${element4}")
+            Log.d(st, "${element1} ,${element2} ${element3},${element4}")
         }
     }
 

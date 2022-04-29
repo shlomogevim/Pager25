@@ -71,14 +71,13 @@ class FirestoreClass {
                     is LoginActivity -> {
                         activity.userLoggedInSuccess(user)
                     }
-                    is SettingActivity ->{
-                        // Call a function of base activity for transferring the result to it.
-                        activity.userDetailsSuccess(user)
-                    }
-                    is PostDetailsActivity->{
-                        activity.getUserName(user)
-                    }
 
+                    is PostDetailsActivity->{
+                        activity.getUserNameSetting(user)
+                    }
+                    is SettingActivity->{
+                        activity.getUserNameSetting(user)
+                    }
                 }
             }
 

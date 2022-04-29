@@ -1,6 +1,7 @@
 package com.sg.pager25.models
 
 import android.os.Parcelable
+import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -10,9 +11,10 @@ data class User(
     val lastName: String = "",
     val email: String = "",
     val image: String = "",
-    val mobile: Long = 0,
+  //  val mobile: Long = 0,
     val gender: String = "",
-    var moto: String = "החיים זה מה שזה ...",
+    val moto: String = "החיים זה מה שזה ...",
+    val time: Timestamp?=null,
     val profileCompleted: Int = 0
 ) : Parcelable
 

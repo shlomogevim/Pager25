@@ -19,7 +19,7 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
          binding= ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       DemiData()
+      //DemiData()
 
         binding.tvRegister.setOnClickListener(this)
         binding.btnLogin.setOnClickListener(this)
@@ -29,6 +29,8 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
     }
 
     private fun DemiData() {
+        /*binding.etEmail.setText("shlomo.gevim@gmail.com")
+        binding.etPassword.setText("111111")*/
         binding.etEmail.setText("shlomo.gevim@gmail.com")
         binding.etPassword.setText("111111")
     }

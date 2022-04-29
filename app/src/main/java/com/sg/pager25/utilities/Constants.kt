@@ -29,6 +29,7 @@ object Constants {
     //---------------------------------------------------------------
     const val SHAR_PREF = "char_pref"
     const val CURRENT_USER_EXIST = "current_user_exist"
+    const val FIRESTORE_USER_ID="firststore_user_id"
     const val EXIST = "exist"
     const val NOT_EXIST = "not_exist"
     const val CONSTANT = "constant"
@@ -59,21 +60,29 @@ object Constants {
     const val POST_EXSTRA="post_exstra"
     const val USER_EXTRA="user_exstra_two"
 
-    const val USER_REF = "users"
+//    const val USER_REF = "users"
+    const val USER_REF = "New users"
 
     const val USERNAME = "userName"
     const val LASTNAME = "lastName"
-    const val FIRESTORE_USER_ID = "user uid"
+    const val USER_EMAIL = "email"
+    const val USER_GENDER = "gender"
+    const val USER_MOTO = "moto"
+    const val USER_IMAGE = "image"
+    const val USER_TIME = "time"
+
     const val USER_ID = "userId"
-    const val USER_FULLNAME = "full name"
-    const val USER_USERNAME = "user name"
-    const val USER_EMAIL = "user email"
+
+
     const val USER_PASSWORD = "user password"
+
+
     const val USER_BIO = "user bio"
-    const val USER_IMAGE = "user image"
-    const val USER_TIME = "user time"
+
     const val USER_IDEXSRTA = "user_idexstra"
     const val USER_USERNAMEEXSRTA = "user_usernameexstra"
+    const val USER_FULLNAME = "full name1"
+    const val USER_USERNAME = "user name1"
 
     const val COMMENT_REF = "Comments"
     const val COMMENT_LIST = "Comment List"

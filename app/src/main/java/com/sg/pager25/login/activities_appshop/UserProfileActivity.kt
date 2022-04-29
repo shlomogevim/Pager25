@@ -44,16 +44,22 @@ class UserProfileActivity : BaseActivity() {
         binding= ActivityUserProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        logi("UserProfileActivity 43")
+           //    FirestoreClass().getUserDetails(this)
 
-       currentUser=intent.getParcelableExtra(USER_EXTRA)!!
-//
-       getExsistData()
-        operateAllButtons()
+     currentUser=intent.getParcelableExtra(USER_EXTRA)!!
+
+        getExsistData()
+       operateAllButtons()
     }
 
+   /* override fun onStart() {  // when we load app
+        super.onStart()
+        FirestoreClass().getUserDetails(this)
+       //getUserDetails()
+    }*/
+
     private fun getExsistData() {
-   //     logi("profile 55   currentUser=$currentUser")
+   logi("UserProfileActivity 60 ======> \n currentUser=$currentUser")
         binding.tvUserName.setText(currentUser.userName)
         binding.tvLastName.setText(currentUser.lastName)
         binding.tvGender.setText(currentUser.gender)
@@ -112,10 +118,19 @@ class UserProfileActivity : BaseActivity() {
         if (lastName != currentUser.lastName) {
             userHashMap[Constants.LASTNAME] = lastName
         }
+        val gender = binding.tvGender.text.toString().trim { it <= ' ' }
+        if (gender!= currentUser.gender) {
+            userHashMap[Constants.USER_GENDER] = gender
+        }
+        val moto = binding.tvMoto.text.toString().trim { it <= ' ' }
+        if (moto != currentUser.moto) {
+            userHashMap[Constants.USER_MOTO] = moto
+        }
 
         if (mUserProfileImageURL.isNotEmpty()) {
             userHashMap[IMAGE] = mUserProfileImageURL
         }
+
 
 
         // Here if user is about to complete the profile then update the field or else no need.
@@ -136,7 +151,7 @@ class UserProfileActivity : BaseActivity() {
             resources.getString(R.string.msg_profile_update_success),
             Toast.LENGTH_SHORT
         ).show()
-        startActivity(Intent(this@UserProfileActivity, DashboardActivity::class.java))
+        startActivity(Intent(this@UserProfileActivity, MainActivityAppShop::class.java))
         finish()
     }
 

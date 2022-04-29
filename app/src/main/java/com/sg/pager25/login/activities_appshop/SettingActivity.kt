@@ -22,14 +22,19 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
         binding= ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        currentUser = intent.getParcelableExtra(Constants.USER_EXTRA)!!
+
+            //  currentUser = intent.getParcelableExtra(Constants.USER_EXTRA)!!
        // logi("SettingActivity   26 =======>  /n $currentUser  ")
 
         binding.tvEditProfile.setOnClickListener(this)
         binding.btnLogout.setOnClickListener(this)
     }
-    override fun onResume() {  // when we load app
+    override fun onResume() {        // when we load app
         super.onResume()
+      FirestoreClass().getUserDetails(this)
+    }
+    fun getUserNameSetting(user: User) {
+        currentUser=user
         getUserDetails()
     }
 
@@ -38,7 +43,7 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
             when (v.id) {
                 R.id.tv_editProfile -> {
                     val intent = Intent(this, UserProfileActivity::class.java)
-                    intent.putExtra(USER_EXTRA, currentUser)
+                    intent.putExtra(USER_EXTRA, currentUser)  //need update profile so "onResume"
                     startActivity(intent)
                 }
                 R.id.btn_logout -> {
@@ -61,23 +66,25 @@ class SettingActivity : BaseActivity(),View.OnClickListener {
 
            binding.tvUserName.text = currentUser.userName
            binding.tvLastName.text = currentUser.lastName
-           binding.tvGender.text = "לא ברור עדיין ..."
+           binding.tvGender.text =currentUser.gender
            binding.tvMail.text = currentUser.email
+           binding.tvMoto.text = currentUser.moto
+           logi("SettingActivity 67  ==============>         \n currentUser= $currentUser")
     }
 
 
-    fun userDetailsSuccess(user: User) {
-//        currentUser = user
-//        hideProgressDialog()
-////        logi("setting 69 user=$user")
-//
-//        GlideLoader(this).loadUserPicture(user.image, binding.ivUserPhoto)
-//
-//        binding.tvUserName.text = user.firstName
-//        binding.tvLastName.text = user.lastName
-//        binding.tvGender.text = "לא ברור עדיין ..."
-//        binding.tvMail.text = user.email
-         }
+   /* fun userDetailsSuccess(user: User) {
+        currentUser = user
+        hideProgressDialog()
+//        logi("setting 69 user=$user")
+
+        GlideLoader(this).loadUserPicture(user.image, binding.ivUserPhoto)
+
+        binding.tvUserName.text = user.userName
+        binding.tvLastName.text = user.lastName
+        binding.tvGender.text =user.gender
+        binding.tvMail.text = user.email
+         }*/
 }
 
 /**

@@ -36,19 +36,21 @@ class SplashActivity : BaseActivity() {
         binding.tvAppName.text="זה מה שלימדו אותנו היום בגן ..."
     }
     private fun pauseIt() {
+
+    /*    var currentUserID = FirestoreClass().getCurrentUserID()
+        logi("splash 41       currentUserID ===>currentUser=$currentUserID  ")*/
+
+
         Handler().postDelayed(
             {
                 var currentUserID = FirestoreClass().getCurrentUserID()
-             logi("splash 42       currentUserID not empty===>currentUser=$currentUserID  ")
+             logi("SplashAvtivity 42  \n     currentUserID  ===> $currentUserID  ")
 
-               //currentUserID=""
+            //currentUserID=""
 
                 if (currentUserID.isNotEmpty()) {
-//                    logi("splash 44       currentUserID not empty===>currentUserID=$currentUserID  ")
-              //      startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
                     startActivity(Intent(this@SplashActivity, MainActivityAppShop::class.java))
                 } else{
-                    logi("splash 50       currentUserID is  empty====>    currentUserID=$currentUserID")
                     startActivity(Intent(this, LoginActivity::class.java))
                 }
                 finish()

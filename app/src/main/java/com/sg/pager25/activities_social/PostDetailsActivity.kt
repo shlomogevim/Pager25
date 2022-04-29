@@ -46,6 +46,7 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
     val comments = ArrayList<Comment>()
     //var currentPostNum = 0
     lateinit var currentPost:Post
+    val st=" מעביר Current Post  "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,14 +54,15 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
         createTextViewArray()
         setContentView(binding.root)
 
-     /*   if (intent.hasExtra(POST_EXSTRA)) {
+        if (intent.hasExtra(POST_EXSTRA)) {
             currentPost = intent.getParcelableExtra(POST_EXSTRA)!!
-        }*/
+        }
+
       //  logi("PostDetailActivity  68          currentPost===>> $currentPost  /n")
 
-//       create_commentsRv()
-//         operateButtoms()
-//        createComments()
+       create_commentsRv()
+         operateButtoms()
+        createComments()
     }
 
     override fun onStart() {
@@ -115,7 +117,7 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
 
     }
 
-     fun getUserName(user: User) {
+    fun getUserNameSetting(user: User) {
         currentUser=user
         drawUserName()
     }

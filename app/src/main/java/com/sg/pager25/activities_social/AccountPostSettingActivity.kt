@@ -23,7 +23,6 @@ import com.sg.pager25.databinding.ActivityAccountPostSettingBinding
 import com.sg.pager25.firestore.FirestoreClass
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
-import com.sg.pager25.utilities.Constants.USER_BIO
 import com.sg.pager25.utilities.Constants.USER_EXTRA
 import com.sg.pager25.utilities.Constants.USER_FULLNAME
 import com.sg.pager25.utilities.Constants.USER_IMAGE
@@ -141,8 +140,8 @@ class AccountPostSettingActivity : BaseActivity() {
                     .lowercase(Locale.getDefault())
                 data[USER_USERNAME] = binding.usernameProfileFrag.text.toString()
                     .lowercase(Locale.getDefault())
-                data[USER_BIO] = binding.bioProfileFragment.text.toString()
-                    .lowercase(Locale.getDefault())
+               /* data[USER_BIO] = binding.bioProfileFragment.text.toString()
+                    .lowercase(Locale.getDefault())*/
 
                 FirestoreClass().updateUserProfileData(this, data)
                 sendToast("Account information has been update successfully ...")
@@ -201,8 +200,8 @@ class AccountPostSettingActivity : BaseActivity() {
                             binding.fullNameProfileFragment.text.toString().toLowerCase()
                         data[USER_USERNAME] =
                             binding.usernameProfileFrag.text.toString().toLowerCase()
-                        data[USER_BIO] =
-                            binding.bioProfileFragment.text.toString().toLowerCase()
+                      /*  data[USER_BIO] =
+                            binding.bioProfileFragment.text.toString().toLowerCase()*/
                         data[USER_IMAGE] = myUrl
                         currentUser?.let {
                             FirebaseFirestore.getInstance().collection(USER_REF)
