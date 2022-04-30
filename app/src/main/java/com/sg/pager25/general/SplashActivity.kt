@@ -46,13 +46,16 @@ class SplashActivity : BaseActivity() {
                 var currentUserID = FirestoreClass().getCurrentUserID()
              logi("SplashAvtivity 42  \n     currentUserID  ===> $currentUserID  ")
 
-            //currentUserID=""
+                //   currentUserID=""
 
-                if (currentUserID.isNotEmpty()) {
-                    startActivity(Intent(this@SplashActivity, MainActivityAppShop::class.java))
+                startActivity(Intent(this, MainActivityAppShop::class.java))
+
+
+              /*  if (currentUserID.isNotEmpty()) {
+                    startActivity(Intent(this, MainActivityAppShop::class.java))
                 } else{
                     startActivity(Intent(this, LoginActivity::class.java))
-                }
+                }*/
                 finish()
             },2
         )

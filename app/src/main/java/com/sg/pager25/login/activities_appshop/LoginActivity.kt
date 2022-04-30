@@ -25,7 +25,6 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
         binding.btnLogin.setOnClickListener(this)
         binding.tvForgotPassword.setOnClickListener(this)
 
-
     }
 
     private fun DemiData() {
@@ -34,7 +33,11 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
         binding.etEmail.setText("shlomo.gevim@gmail.com")
         binding.etPassword.setText("111111")
     }
+    private fun setPreData(email:String,password:String) {
 
+        binding.etEmail.setText(email)
+        binding.etPassword.setText(password)
+    }
 
     private fun validateLoginDetails(): Boolean {
         return when {
@@ -52,6 +55,8 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
         }
     }
 
+
+
     private fun logInRegisteredUser() {
 
 
@@ -65,7 +70,6 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
            logi("login 64    ======>  email=$email  password=$password")
              FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
-
                     if (task.isSuccessful) {
                         logi("login 69 email=$email  password=$password")
                         FirestoreClass().getUserDetails(this)
@@ -104,17 +108,19 @@ class LoginActivity : BaseActivity(),View.OnClickListener {
 
         // if (user.profileCompleted == ) {
        logi("login 105  user==>$user")
-        if (user.profileCompleted ==0) {
+       /* if (user.profileCompleted ==0) {
             val intent = Intent(this@LoginActivity, UserProfileActivity::class.java)
             intent.putExtra(EXTRA_USER_DETAILS, user)
             startActivity(intent)
            // startActivity(Intent(this@LoginActivity, UserProfileActivity::class.java))
-        }else{
+        }else{*/
           //  val intent = Intent(this@LoginActivity, DashboardActivity::class.java)
             val intent = Intent(this@LoginActivity,MainActivityAppShop::class.java)
             intent.putExtra(EXTRA_USER_DETAILS, user)
             startActivity(intent)
-        }
+//        }
+
+
 
         finish()
     }

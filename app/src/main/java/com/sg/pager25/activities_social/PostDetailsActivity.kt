@@ -3,6 +3,8 @@ package com.sg.pager25.activities_social
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -39,14 +41,12 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
     lateinit var binding:ActivityPostDetailsBinding
 
     private var currentUser:User?= null
-    var util = UtilityPost()
+   var util = UtilityPost()
     var textViewArray = ArrayList<TextView>()
     lateinit var commentsRV: RecyclerView
     lateinit var commentAdapter: CommentAdapter
     val comments = ArrayList<Comment>()
-    //var currentPostNum = 0
     lateinit var currentPost:Post
-    val st=" מעביר Current Post  "
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,13 +56,15 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
 
         if (intent.hasExtra(POST_EXSTRA)) {
             currentPost = intent.getParcelableExtra(POST_EXSTRA)!!
+
         }
 
-      //  logi("PostDetailActivity  68          currentPost===>> $currentPost  /n")
-
+      // logi("PostDetailActivity  61          currentPost===>> $currentPost  /n")
        create_commentsRv()
          operateButtoms()
-        createComments()
+        retriveComments()
+        drawHeadline()
+        createCommant()
     }
 
     override fun onStart() {
@@ -81,55 +83,58 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
 
         binding.profileBtn.setOnClickListener {
        //  logi("PostDetaileActivity  92   =====> /n  currentPost=$currentPost ")
-//            val intent=Intent(this,AccountPostSettingActivity::class.java)
             val intent=Intent(this, SettingActivity::class.java)
             intent.putExtra(USER_EXTRA,currentUser)
           startActivity(intent)
         }
-
-
-//
-//        val textWatcher=object : TextWatcher {
-//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                //util.logi("PostDetails  102                            currentUser=$currentUser")
-//                if (currentUser==null){
-//                    hideKeyboard()
-//                    util.createDialog(this@PostDetailsActivity, 2)
-//                }
-//            }
-//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
-//            override fun afterTextChanged(p0: Editable?) {  }
-//        }
-//
-//        val profileC= binding.profileImageComment
-//        val textC= binding.postCommentText
-//        textC.addTextChangedListener(textWatcher)
-//
-//        profileC.setOnClickListener {
-//            util.logi("PostDetails  109                             currentUser=$currentUser")
-//            addComment()
-//        }
-//        textC.setOnClickListener {
-//            util.logi("PostDetails  110                               currentUser=$currentUser")
-//
-//            addComment()
-//        }
-
     }
 
     fun getUserNameSetting(user: User) {
         currentUser=user
-        drawUserName()
-    }
 
-    fun  drawUserName(){
-//        logi("PostDetailsActivity 232   currentUser= $currentUser")
+            //  currentUser=null
+
         if (currentUser==null){
             binding.nameCurrentUserName.setText("אנונימי")
         }else{
             binding.nameCurrentUserName.setText("${currentUser!!.userName}")
         }
     }
+
+    private fun createCommant(){
+        val textWatcher=object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                logi("PostDetailsActivuty  102                            currentUser=$currentUser")
+                if (currentUser==null){
+                    hideKeyboard()
+                    var st="כדי לכתוב הערות אתה צריך קודם להכנס ..."
+
+                  //  showErrorSnackBar(resources.getString(R.string.err_msg_enter_email), true)
+                    showErrorSnackBar(st, true)
+
+
+                  //  util.createDialog(this@PostDetailsActivity, 2)
+                }
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {  }
+            override fun afterTextChanged(p0: Editable?) {  }
+        }
+
+        val profileC= binding.profileImageComment
+        val textC= binding.postCommentText
+        textC.addTextChangedListener(textWatcher)
+
+        profileC.setOnClickListener {
+            util.logi("PostDetails  109                             currentUser=$currentUser")
+            addComment()
+        }
+        textC.setOnClickListener {
+            util.logi("PostDetails  110                               currentUser=$currentUser")
+
+            addComment()
+        }
+    }
+
 
     private fun drawHeadline() {
         val num = currentPost.postNum
@@ -143,7 +148,7 @@ class PostDetailsActivity : BaseActivity(), CommentsOptionClickListener {
         }
     }
 
-    private fun createComments() {
+    private fun retriveComments() {
       //  logi(" PostDetail 124")
         FirebaseFirestore.getInstance().collection(COMMENT_REF).document(currentPost.postNum.toString())
             .collection(COMMENT_LIST)

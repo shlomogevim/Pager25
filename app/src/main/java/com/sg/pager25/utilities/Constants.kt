@@ -79,7 +79,7 @@ object Constants {
 
     const val USER_BIO = "user bio"
 
-    const val USER_IDEXSRTA = "user_idexstra"
+    const val USER_EXSRTA = "user_exstra"
     const val USER_USERNAMEEXSRTA = "user_usernameexstra"
     const val USER_FULLNAME = "full name1"
     const val USER_USERNAME = "user name1"

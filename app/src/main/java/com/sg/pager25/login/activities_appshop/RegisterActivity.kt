@@ -1,5 +1,6 @@
 package com.sg.pager25.login.activities_appshop
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Toast
@@ -12,6 +13,7 @@ import com.sg.pager25.databinding.ActivityRegisterBinding
 import com.sg.pager25.firestore.FirestoreClass
 import com.sg.pager25.general.BaseActivity
 import com.sg.pager25.models.User
+import com.sg.pager25.utilities.Constants.USER_EXSRTA
 
 class RegisterActivity : BaseActivity() {
     lateinit var binding: ActivityRegisterBinding
@@ -31,6 +33,8 @@ class RegisterActivity : BaseActivity() {
             //startActivity(Intent(this,LoginActivity::class.java))
             onBackPressed()
         }
+
+
 
     }
 
@@ -113,8 +117,12 @@ class RegisterActivity : BaseActivity() {
                                 binding.etEmail.text.toString().trim { it <= ' ' }
                             )
                             FirestoreClass().registerUser(this,user)
-                            //   FirebaseAuth.getInstance().signOut()
-                            // finish()
+
+
+
+
+                          /*    FirebaseAuth.getInstance().signOut()
+                           finish()*/
                         } else {
                             hideProgressDialog()
                             showErrorSnackBar(task.exception!!.message.toString(), true)
@@ -129,8 +137,8 @@ class RegisterActivity : BaseActivity() {
             resources.getString(R.string.register_success),
             Toast.LENGTH_SHORT
         ).show()
-
         FirebaseAuth.getInstance().signOut()
+
         finish()
     }
 }

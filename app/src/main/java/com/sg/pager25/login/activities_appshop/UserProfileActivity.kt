@@ -131,15 +131,6 @@ class UserProfileActivity : BaseActivity() {
             userHashMap[IMAGE] = mUserProfileImageURL
         }
 
-
-
-        // Here if user is about to complete the profile then update the field or else no need.
-        // 0: User profile is incomplete.
-        // 1: User profile is completed.
-
-      //  userHashMap[COMPLETE_PROFILE] = 1
-
-
         // call the reg isterUser function of FireStore class to make an entry in the database.
         FirestoreClass().updateUserProfileData(this@UserProfileActivity, userHashMap)
     }
@@ -208,7 +199,8 @@ class UserProfileActivity : BaseActivity() {
     private fun launchImageCrop(uri: Uri) {
         CropImage.activity(uri)
             .setGuidelines(CropImageView.Guidelines.ON)
-            .setAspectRatio(1920, 1080)
+          //  .setAspectRatio(1920, 1080)
+            .setAspectRatio(1, 1)
             .setCropShape(CropImageView.CropShape.RECTANGLE)
             .start(this)
     }
