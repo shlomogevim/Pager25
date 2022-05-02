@@ -23,12 +23,12 @@ class MainActivityAppShop : AppCompatActivity() {
     val util = UtilityPost()
     val posts = ArrayList<Post>()
     lateinit var postAdapter: PostAdapter
-    val st=" CurrentUser Not Exists "
-    val st1=" מייצר את כל תמונות הפוסטים "
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainAppShopBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val posts = downloadAllPost()
 
         val pager = binding.viewPager
